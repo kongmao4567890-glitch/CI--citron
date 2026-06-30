@@ -1,0 +1,97 @@
+name: Build Citron 汉化版 (Windows)
+concurrency:
+  group: build-windows-zh-${{ github.ref }}
+  cancel-in-progress: true
+on:
+  workflow_dispatch: {}
+
+jobs:
+  build-chinese:
+    name: "Citron 汉化版构建 (Windows Clangtron - x64)"
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    env:
+      CPM_SOURCE_CACHE: /home/runner/.cache/cpm
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Clone Citron Source
+        run: |
+          ATTEMPT=0
+          MAX_ATTEMPTS=10
+          while true; do
+            ATTEMPT=$((ATTEMPT + 1))
+            echo "Attempt $ATTEMPT of $MAX_ATTEMPTS: Cloning Citron..."
+            rm -rf citron
+            if git clone "https://github.com/citron-neo/emulator.git" citron; then
+              echo "Clone successful on attempt $ATTEMPT."
+              break
+            fi
+            if [ $ATTEMPT -ge $MAX_ATTEMPTS ]; then
+              echo "Failed after $MAX_ATTEMPTS attempts."
+              exit 1
+            fi
+            echo "Clone failed. Retrying in 15 seconds..."
+            sleep 15
+          done
+
+      - name: Apply Chinese Translation Patch
+        run: |
+          chmod +x patch-translation.sh
+          ./patch-translation.sh ./citron
+
+      - name: Cache CPM and Toolchain
+        uses: actions/cache@v4
+        with:
+          path: /home/runner/.cache/cpm
+          key: clangtron-zh-cache-${{ runner.os }}-${{ hashFiles('citron/CMakeModules/dependencies.cmake', 'citron/build-clangtron-windows.sh') }}
+          restore-keys: |
+            clangtron-zh-cache-${{ runner.os }}-
+
+      - name: Get Version
+        id: version
+        working-directory: ./citron
+        run: |
+          git fetch --tags
+          VERSION=$(git rev-parse --short HEAD)
+          echo "VERSION=${VERSION}" >> $GITHUB_OUTPUT
+
+      - name: Skip BOLT build
+        run: |
+          echo '#!/bin/bash' | sudo tee /usr/local/bin/llvm-bolt-21
+          echo '#!/bin/bash' | sudo tee /usr/local/bin/merge-fdata-21
+          sudo chmod +x /usr/local/bin/llvm-bolt-21
+          sudo chmod +x /usr/local/bin/merge-fdata-21
+
+      - name: Setup Clangtron Build Environment
+        working-directory: ./citron
+        run: |
+          chmod +x build-clangtron-windows.sh
+          ./build-clangtron-windows.sh setup
+          echo "${HOME}/.cache/cpm/llvm-mingw/bin" >> "$GITHUB_PATH"
+
+      - name: Build Citron (Clangtron LTO)
+        working-directory: ./citron
+        run: |
+          export CITRON_BUILD_TYPE=Release
+          ./build-clangtron-windows.sh use --pgo none --lto full
+
+      - name: Package Windows Build
+        run: |
+          mkdir -p dist
+          BIN_DIR="./citron/build/use-nopgo/bin"
+          if [ ! -d "$BIN_DIR" ]; then
+            echo "::error::Build output not found at $BIN_DIR"
+            exit 1
+          fi
+          cd "$BIN_DIR"
+          zip -r "${GITHUB_WORKSPACE}/dist/Citron-windows-nightly-${{ steps.version.outputs.VERSION }}-x64-clangtron-汉化版.zip" .
+
+      - name: Upload Build Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Citron-Windows-汉化版
+          path: "dist/*.zip"
+          retention-days: 30
