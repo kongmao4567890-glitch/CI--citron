@@ -747,6 +747,57 @@ jobs:
           name: Citron-Windows-Nightly-Clangtron-x64
           path: "dist/*.zip"
 
+  build-windows-clang-cl:
+    name: "Citron Build (Windows clang-cl - x64)"
+    needs: [check-version]
+    if: needs.check-version.outputs.should_build == 'true'
+    runs-on: windows-2022
+    timeout-minutes: 240
+    permissions:
+      contents: read
+    env:
+      CPM_SOURCE_CACHE: C:/cpmcache
+      SCCACHE_DIR: C:/sccache
+      SCCACHE_CACHE_SIZE: 5G
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Clone Citron Source
+        shell: pwsh
+        run: git clone https://github.com/citron-neo/emulator.git citron
+      - uses: msys2/setup-msys2@v2
+        with:
+          msystem: CLANG64
+          update: true
+      - uses: actions/cache@v4
+        with:
+          path: |
+            C:/cpmcache
+            C:/sccache
+          key: clang-cl-nightly-${{ runner.os }}-${{ hashFiles('citron/CMakeModules/dependencies.cmake', 'citron/build-clangtron-windows.sh') }}
+          restore-keys: clang-cl-nightly-${{ runner.os }}-
+      - name: Setup clang-cl
+        shell: msys2 {0}
+        working-directory: ./citron
+        run: ./build-clangtron-windows.sh setup --compiler clang-cl
+      - name: Build clang-cl
+        shell: msys2 {0}
+        working-directory: ./citron
+        run: ./build-clangtron-windows.sh use --compiler clang-cl --pgo none --lto full
+      - name: Package Windows Build
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force dist | Out-Null
+          $version = (git -C citron rev-parse --short HEAD).Trim()
+          Compress-Archive -Path citron/build/clang-cl/use/* `
+            -DestinationPath "dist/Citron-windows-nightly-$version-x64-clang-cl.zip"
+      - name: Upload Windows Build
+        uses: actions/upload-artifact@v4
+        with:
+          name: Citron-Windows-Nightly-ClangCL-x64
+          path: "dist/*-x64-clang-cl.zip"
+
   # ===========================================================================
   # RELEASE - Android
   # ===========================================================================
@@ -986,7 +1037,7 @@ jobs:
   release-windows:
     if: ${{ github.ref_name == 'main' }}
     name: "Release Windows Nightly"
-    needs: [check-version, build-windows-clangtron]
+    needs: [check-version, build-windows-clangtron, build-windows-clang-cl]
     permissions:
       contents: write
     runs-on: ubuntu-latest
@@ -1021,6 +1072,7 @@ jobs:
           prerelease: false
           files: |
             *-x64-clangtron.zip
+            *-x64-clang-cl.zip
           body: |
             **Citron Upstream Commit:** [`${{ needs.check-version.outputs.new_hash }}`](https://github.com/citron-neo/emulator/commit/${{ needs.check-version.outputs.new_hash_full }})
 
@@ -1028,7 +1080,7 @@ jobs:
 
             **Build Details:**
             - Platform: Windows (x64)
-            - Toolchain: Clangtron (Clang LTO cross-compiled from Linux)
+            - Toolchains: Clangtron and native clang-cl/MSVC ABI
             - Build Type: Nightly
             - Date: ${{ env.BUILD_DATE }}
       - name: Update LATEST_VERSION
