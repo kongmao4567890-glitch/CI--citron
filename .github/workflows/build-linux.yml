@@ -70,101 +70,105 @@ jobs:
     needs: [check-version]
     if: needs.check-version.outputs.should_build == 'true'
     runs-on: ${{ matrix.os }}
+    container: ${{ matrix.container }}
     timeout-minutes: 120
+    env:
+      CPM_SOURCE_CACHE: ${{ github.workspace }}/.cpm-cache
+
     strategy:
       fail-fast: false
       matrix:
         include:
           - name: "Citron Build (Normal x86_64)"
             os: ubuntu-latest
+            container: ghcr.io/pkgforge-dev/archlinux:latest
             artifact_suffix: "_x86_64"
             script_suffix: ""
-            build_arg: ""
+            arch_arg: ""
           - name: "Citron Build (Optimized x86_64)"
             os: ubuntu-latest
+            container: ghcr.io/pkgforge-dev/archlinux:latest
             artifact_suffix: "_v3"
             script_suffix: "_v3"
-            build_arg: "v3"
+            arch_arg: "--arch v3"
           - name: "Citron Build (aarch64)"
             os: ubuntu-24.04-arm
+            container: ghcr.io/pkgforge-dev/archlinux:latest
             artifact_suffix: "_aarch64"
             script_suffix: ""
-            build_arg: ""
-
-    container: ghcr.io/pkgforge-dev/archlinux:latest
+            arch_arg: ""
 
     steps:
-      - name: Install Git
-        run: pacman -Syu --noconfirm --needed git
-
-      - name: Checkout Workflow Scripts
+      - name: Checkout CI Scripts
         uses: actions/checkout@v4
+        with:
+          persist-credentials: false
 
-      - name: Clone Citron Source Code
+      - name: Install Base Container Tools
+        run: pacman -Sy --needed --noconfirm git
+
+      - name: Clone Citron Source
+        # No --recursive: build-citron-linux.sh uses CPM to fetch all library
+        # dependencies at cmake configure time. No submodule init is required.
         shell: bash
         run: |
           REPO_URL="https://github.com/citron-neo/emulator.git"
-          
           ATTEMPT=0
           MAX_ATTEMPTS=999
-
           while [ $ATTEMPT -lt $MAX_ATTEMPTS ]; do
             ATTEMPT=$((ATTEMPT + 1))
-            echo "Attempt $ATTEMPT of $MAX_ATTEMPTS: Cloning repository..."
-
-            # 1. CRITICAL: Wipe the directory before every attempt
-            rm -rf emulator
-
-            if git clone --recursive "https://github.com/citron-neo/emulator.git" emulator; then
+            echo "Attempt $ATTEMPT of $MAX_ATTEMPTS: Cloning..."
+            rm -rf citron
+            if git clone "$REPO_URL" citron; then
               echo "✅ Clone successful on attempt $ATTEMPT."
               exit 0
             fi
-
             echo "⚠️ Clone failed. Retrying in 15 seconds..."
             sleep 15
           done
-
           echo "❌ Failed to clone after $MAX_ATTEMPTS attempts."
           exit 1
 
-      - name: Prepare Build Environment
-        run: |
-          mv get-dependencies.sh emulator/
-          mv build-citron.sh emulator/
-          mv package-citron.sh emulator/
-
-      - name: Add Git Safe Directory
-        working-directory: ./emulator
+      - name: Set Git Safe Directory
+        working-directory: ./citron
         run: git config --global --add safe.directory "$PWD"
 
-      - name: Install dependencies
-        working-directory: ./emulator
-        run: chmod +x ./get-dependencies.sh && ./get-dependencies.sh
+      - name: Cache CPM Sources
+        uses: actions/cache@v4
+        with:
+          path: ${{ github.workspace }}/.cpm-cache
+          key: cpm-linux-${{ runner.os }}-${{ matrix.os }}-${{ hashFiles('citron/CMakeModules/dependencies.cmake') }}
+          restore-keys: |
+            cpm-linux-${{ runner.os }}-${{ matrix.os }}-
 
-      - name: Build Citron from source
-        working-directory: ./emulator
+      - name: Setup Build Environment
+        working-directory: ./citron
+        run: |
+          chmod +x ./build-citron-linux.sh
+          ./build-citron-linux.sh setup
+
+      - name: Get Version
+        id: version
+        working-directory: ./citron
+        run: echo "sha=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+
+      - name: Build Citron
+        working-directory: ./citron
+        env:
+          CITRON_BUILD_TYPE: Release
+          APP_VERSION: ${{ steps.version.outputs.sha }}
+          ARCH_SUFFIX: ${{ matrix.script_suffix }}
         run: |
           NPROC_VAL=$(nproc --all)
           JOBS_VAL=$((NPROC_VAL > 4 ? 4 : NPROC_VAL))
-          chmod +x ./build-citron.sh
-          JOBS=${JOBS_VAL} DEVEL=false ./build-citron.sh ${{ matrix.build_arg }}
-
-      - name: Package AppImage with Correct Name
-        working-directory: ./emulator
-        run: |
-          GIT_SHA=$(git rev-parse --short HEAD)
-          export APP_VERSION="${GIT_SHA}"
-          export VERSION="${GIT_SHA}"
-          export ARCH_SUFFIX="${{ matrix.script_suffix }}"
-          export DEVEL="false"
-          chmod +x ./package-citron.sh
-          ./package-citron.sh
+          JOBS=${JOBS_VAL} ./build-citron-linux.sh use --pgo none --lto full ${{ matrix.arch_arg }}
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
         with:
           name: Artifacts${{ matrix.artifact_suffix }}
-          path: emulator/dist/
+          path: citron/build/use-nopgo/AppImage/
+
 
   release:
     if: ${{ github.ref_name == 'main' }}
@@ -223,7 +227,7 @@ jobs:
             **Build Details:**
             - Platform: Linux (x86_64, x86_64_v3, aarch64)
             - Format: AppImage + tar.zst packages
-            - Build Type: Release with optimizations
+            - Build Type: Release with LTO
             - Date: ${{ env.BUILD_DATE }}
 
       - name: Update LATEST_VERSION

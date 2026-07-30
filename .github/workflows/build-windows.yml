@@ -115,14 +115,6 @@ jobs:
           VERSION=$(git rev-parse --short HEAD)
           echo "VERSION=${VERSION}" >> $GITHUB_OUTPUT
 
-      - name: Skip BOLT build (not needed for --pgo none)
-        run: |
-          echo '#!/bin/bash' | sudo tee /usr/local/bin/llvm-bolt-21
-          echo '#!/bin/bash' | sudo tee /usr/local/bin/merge-fdata-21
-          sudo chmod +x /usr/local/bin/llvm-bolt-21
-          sudo chmod +x /usr/local/bin/merge-fdata-21
-
-
       - name: Setup Clangtron Build Environment
         working-directory: ./citron
         run: |
@@ -196,6 +188,11 @@ jobs:
         run: |
           New-Item -ItemType Directory -Force dist | Out-Null
           $version = (git -C citron rev-parse --short HEAD).Trim()
+          # Compress-Archive silently drops directories that contain zero files, which would
+          # strip the empty portable-mode "user" folder citron.exe expects next to its exe.
+          # A placeholder file keeps the directory non-empty so it survives archiving.
+          "This folder marks a portable installation. Citron stores config and save data here." |
+            Set-Content -Path citron/build/clang-cl/use/user/README.txt
           Compress-Archive -Path citron/build/clang-cl/use/* `
             -DestinationPath "dist/Citron-windows-nightly-$version-x64-clang-cl.zip"
       - name: Upload Windows Build
@@ -275,5 +272,5 @@ jobs:
             exit 0
           fi
           curl -H "Content-Type: application/json" \
-               -d "{\"content\":\"🪟 **New Windows Build Available!**\n\n📦 **Version:** \`${{ env.APP_VERSION }}\`\n📅 **Date:** ${DATE}\n🔧 **Toolchain:** Clangtron (Clang LTO)\n🔗 **Download:** $DOWNLOAD_URL\"}" \
+               -d "{\"content\":\"🪟 **New Windows Build Available!**\n\n📦 **Version:** \`${{ env.APP_VERSION }}\`\n📅 **Date:** ${DATE}\n🔧 **Toolchains:** Clangtron (Clang LTO) & clang-cl (Clang LTO)\n🔗 **Download:** $DOWNLOAD_URL\"}" \
                "$WEBHOOK_URL"

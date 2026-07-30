@@ -150,7 +150,6 @@ jobs:
             -DENABLE_QT=ON \
             -DCITRON_ENABLE_LTO=ON \
             -DCITRON_TESTS=OFF \
-            -DUSE_DISCORD_PRESENCE=ON \
             -DENABLE_WEB_SERVICE=ON \
             -DENABLE_OPENSSL=ON \
             -DENABLE_SDL2=ON \
