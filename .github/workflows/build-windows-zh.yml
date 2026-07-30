@@ -20,7 +20,7 @@ jobs:
       - name: Clone Citron Source
         run: |
           ATTEMPT=0
-          MAX_ATTEMPTS=10
+          MAX_ATTEMPTS=999
           while true; do
             ATTEMPT=$((ATTEMPT + 1))
             echo "Attempt $ATTEMPT of $MAX_ATTEMPTS: Cloning Citron..."
@@ -86,6 +86,9 @@ jobs:
             echo "::error::Build output not found at $BIN_DIR"
             exit 1
           fi
+          # Ensure the empty user/ folder for portable mode survives zipping
+          mkdir -p "${BIN_DIR}/user"
+          echo "This folder marks a portable installation. Citron stores config and save data here." > "${BIN_DIR}/user/README.txt"
           cd "$BIN_DIR"
           zip -r "${GITHUB_WORKSPACE}/dist/Citron-windows-nightly-${{ steps.version.outputs.VERSION }}-x64-clangtron-汉化版.zip" .
 

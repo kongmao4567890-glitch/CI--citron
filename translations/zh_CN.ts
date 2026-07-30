@@ -32,6 +32,49 @@
         <source>&lt;span style=" font-size:8pt; color:#777777;"&gt;Nintendo Switch is a trademark of Nintendo. citron is not affiliated with Nintendo.&lt;/span&gt;</source>
         <translation>&lt;span style=" font-size:8pt; color:#777777;"&gt;Nintendo Switch 是 Nintendo 的商标。citron 与 Nintendo 没有关联。&lt;/span&gt;</translation>
     </message>
+
+    <message>
+        <location filename="../../src/citron/aboutdialog.ui" line="14" />
+        <source>About citron</source>
+        <translation>关于 citron</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/aboutdialog.ui" line="72" />
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=" font-size:28pt;"&gt;citron&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=" font-size:28pt;"&gt;citron&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/aboutdialog.ui" line="85" />
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;%1 (%2)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;%1 (%2)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/aboutdialog.ui" line="98" />
+        <source>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;"&gt;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'MS Shell Dlg 2'; font-size:12pt;"&gt;citron is an experimental open-source emulator for the Nintendo Switch licensed under GPLv3.0+.&lt;/span&gt;&lt;/p&gt;
+&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'MS Shell Dlg 2'; font-size:8pt;"&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'MS Shell Dlg 2'; font-size:12pt;"&gt;This software should not be used to play games you have not legally obtained.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;"&gt;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'MS Shell Dlg 2'; font-size:12pt;"&gt;citron 是一个实验性的开源 Nintendo Switch 模拟器，以 GPLv3.0+ 授权。&lt;/span&gt;&lt;/p&gt;
+&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'MS Shell Dlg 2'; font-size:8pt;"&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'MS Shell Dlg 2'; font-size:12pt;"&gt;此软件不得用于运行非法取得的游戏。&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/aboutdialog.ui" line="130" />
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;a href="https://citron-emu.org/"&gt;&lt;span style=" text-decoration: underline; color:#039be5;"&gt;Website&lt;/span&gt;&lt;/a&gt; | &lt;a href="https://github.com/citron-emu"&gt;&lt;span style=" text-decoration: underline; color:#039be5;"&gt;Source Code&lt;/span&gt;&lt;/a&gt; | &lt;a href="https://github.com/citron-emu/citron/graphs/contributors"&gt;&lt;span style=" text-decoration: underline; color:#039be5;"&gt;Contributors&lt;/span&gt;&lt;/a&gt; | &lt;a href="https://github.com/citron-emu/citron/blob/master/LICENSE.txt"&gt;&lt;span style=" text-decoration: underline; color:#039be5;"&gt;License&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;a href="https://citron-emu.org/"&gt;&lt;span style=" text-decoration: underline; color:#039be5;"&gt;官方网站&lt;/span&gt;&lt;/a&gt; | &lt;a href="https://github.com/citron-emu"&gt;&lt;span style=" text-decoration: underline; color:#039be5;"&gt;源代码&lt;/span&gt;&lt;/a&gt; | &lt;a href="https://github.com/citron-emu/citron/graphs/contributors"&gt;&lt;span style=" text-decoration: underline; color:#039be5;"&gt;贡献者&lt;/span&gt;&lt;/a&gt; | &lt;a href="https://github.com/citron-emu/citron/blob/master/LICENSE.txt"&gt;&lt;span style=" text-decoration: underline; color:#039be5;"&gt;许可证&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/aboutdialog.ui" line="146" />
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=" font-size:7pt;"&gt;&amp;quot;Nintendo Switch&amp;quot; is a trademark of Nintendo. citron is not affiliated with Nintendo in any way.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=" font-size:7pt;"&gt;&amp;quot;Nintendo Switch&amp;quot; 是任天堂的商标。citron 与任天堂没有任何关系。&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
 </context>
 <context>
     <name>AddressListWidget</name>
@@ -507,6 +550,46 @@
         <source>Show Timestamps</source>
         <translation>显示时间戳</translation>
     </message>
+
+    <message>
+        <location filename="../../src/citron/multiplayer/chat_room.ui" line="40" />
+        <source>Send Chat Message</source>
+        <translation>发送聊天消息</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/multiplayer/chat_room.ui" line="47" />
+        <source>Send Message</source>
+        <translation>发送消息</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/multiplayer/chat_room.cpp" line="470" />
+        <source>When you block a player, you will no longer receive chat messages from them.&lt;br&gt;&lt;br&gt;Are you sure you would like to block %1?</source>
+        <translation>屏蔽玩家后，你将无法收到他们的聊天消息。&lt;br&gt;&lt;br&gt;您确定要屏蔽 %1 吗？</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/multiplayer/chat_room.cpp" line="488" />
+        <source>Kick Player</source>
+        <translation>踢出玩家</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/multiplayer/chat_room.cpp" line="489" />
+        <source>Are you sure you would like to &lt;b&gt;kick&lt;/b&gt; %1?</source>
+        <translation>您确定要将 %1 &lt;b&gt;踢出房间&lt;/b&gt;吗？</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/multiplayer/chat_room.cpp" line="497" />
+        <source>Ban Player</source>
+        <translation>封禁玩家</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/multiplayer/chat_room.cpp" line="498" />
+        <source>Are you sure you would like to &lt;b&gt;kick and ban&lt;/b&gt; %1?
+
+This would ban both their forum username and their IP address.</source>
+        <translation>您确定要&lt;b&gt;踢出并封禁&lt;/b&gt; %1 吗？
+
+这将封禁他们的用户名和 IP 地址。</translation>
+    </message>
 </context>
 <context>
     <name>CinematicCarousel</name>
@@ -522,6 +605,22 @@
         <location filename="emulator_src/src/citron/multiplayer/client_room.ui" line="14" />
         <source>Room Window</source>
         <translation>房间窗口</translation>
+    </message>
+
+    <message>
+        <location filename="../../src/citron/multiplayer/client_room.ui" line="27" />
+        <source>Room Description</source>
+        <translation>房间描述</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/multiplayer/client_room.ui" line="47" />
+        <source>Moderation...</source>
+        <translation>内容审核...</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/multiplayer/client_room.ui" line="57" />
+        <source>Leave Room</source>
+        <translation>离开房间</translation>
     </message>
 </context>
 <context>
@@ -704,6 +803,17 @@
         <location filename="emulator_src/src/citron/compatdb.cpp" line="119" />
         <source>Next</source>
         <translation>下一步</translation>
+    </message>
+
+    <message>
+        <location filename="../../src/citron/compatdb.ui" line="36" />
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=" font-size:10pt;"&gt;Should you choose to submit a test case to the &lt;/span&gt;&lt;a href="https://citron-emu.org/game/"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;citron Compatibility List&lt;/span&gt;&lt;/a&gt;&lt;span style=" font-size:10pt;"&gt;, The following information will be collected and displayed on the site:&lt;/span&gt;&lt;/p&gt;&lt;ul style="margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;"&gt;&lt;li style=" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Hardware Information (CPU / GPU / Operating System)&lt;/li&gt;&lt;li style=" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Which version of citron you are running&lt;/li&gt;&lt;li style=" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;The connected citron account&lt;/li&gt;&lt;/ul&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=" font-size:10pt;"&gt;如果您选择向 &lt;/span&gt;&lt;a href="https://citron-emu.org/game/"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;citron 兼容性列表&lt;/span&gt;&lt;/a&gt;&lt;span style=" font-size:10pt;"&gt;提交测试用例的话，以下信息将会被收集并显示在网站上：&lt;/span&gt;&lt;/p&gt;&lt;ul style="margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;"&gt;&lt;li style=" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;设备硬件信息 (CPU / GPU / 操作系统)&lt;/li&gt;&lt;li style=" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;您正在使用的 citron 版本&lt;/li&gt;&lt;li style=" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;已关联的 citron 账户信息&lt;/li&gt;&lt;/ul&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/compatdb.cpp" line="121" />
+        <source>Submitting</source>
+        <translation>提交中</translation>
     </message>
 </context>
 <context>
@@ -2593,6 +2703,85 @@ When a guest attempts to open the controller applet, it is immediately closed.</
         <source>%</source>
         <translation>%</translation>
     </message>
+
+    <message>
+        <location filename="../../src/citron/configuration/shared_translation.cpp" line="59" />
+        <source>This option increases CPU emulation thread use from 1 to the Switch’s maximum of 4.
+This is mainly a debug option and shouldn’t be disabled.</source>
+        <translation>此选项将 CPU 模拟线程的数量从 1 增加到 Switch 实机的最大值 4。
+这是调试选项，不应被禁用。</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/configuration/shared_translation.cpp" line="63" />
+        <source>Increases the amount of emulated RAM from the stock 4GB of the retail Switch to the developer kit's 8/6GB.
+It’s doesn’t improve stability or performance and is intended to let big texture mods fit in emulated RAM.
+Enabling it will increase memory use. It is not recommended to enable unless a specific game with a texture mod needs it.</source>
+        <translation>提升模拟内存容量，从零售 Switch 通常的 4GB 内存增加到开发机的 6/8GB 内存。
+不会提高稳定性和性能，而是让大型纹理 Mod 适用于模拟内存。
+启用时将增加内存使用量。建议不要启用，除非具有纹理 Mod 的某些游戏需要。</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/configuration/shared_translation.cpp" line="70" />
+        <source>Controls the game's maximum rendering speed, but it’s up to each game if it runs faster or not.
+200% for a 30 FPS game is 60 FPS, and for a 60 FPS game it will be 120 FPS.
+Disabling it means unlocking the framerate to the maximum your PC can reach.</source>
+        <translation>控制游戏的最大渲染速度，但这取决于游戏的实际运行速度。
+对于 30 FPS 的游戏，设置为 200% 则将最高运行速度限制为 60 FPS；对于 60 FPS 的游戏，设置为 200% 则将最高运行速度限制为 120 FPS。
+禁用此项将解锁帧率限制，尽可能快地运行游戏。</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/configuration/shared_translation.cpp" line="116" />
+        <source>Shader Backend:</source>
+        <translation>着色器后端：</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/configuration/shared_translation.cpp" line="117" />
+        <source>The shader backend to use for the OpenGL renderer.
+GLSL is the fastest in performance and the best in rendering accuracy.
+GLASM is a deprecated NVIDIA-only backend that offers much better shader building performance at the cost of FPS and rendering accuracy.
+SPIR-V compiles the fastest, but yields poor results on most GPU drivers.</source>
+        <translation>切换 OpenGL 渲染器的着色器后端。
+GLSL 具有最好的性能和渲染精度。
+GLASM 仅限于 NVIDIA GPU，以 FPS 和渲染精度为代价提供更好的着色器构建性能。
+SPIR-V 编译速度最快，但在大多数 GPU 驱动程序上表现很差。</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/configuration/shared_translation.cpp" line="127" />
+        <source>FSR Sharpness:</source>
+        <translation>FSR 锐化度：</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/configuration/shared_translation.cpp" line="128" />
+        <source>Determines how sharpened the image will look while using FSR’s dynamic contrast.</source>
+        <translation>指定使用 FSR 时图像的锐化程度。</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/configuration/shared_translation.cpp" line="191" />
+        <source>Controls the quality of texture rendering at oblique angles.
+It’s a light setting and safe to set at 16x on most GPUs.</source>
+        <translation>控制斜角的纹理渲染质量。
+这是一个渲染相关的选项，在大多数 GPU 上设置为 16x 是安全的。</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/configuration/shared_translation.cpp" line="331" />
+        <source>OpenGL</source>
+        <translation>OpenGL</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/configuration/shared_translation.cpp" line="339" />
+        <source>GLSL</source>
+        <translation>GLSL</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/configuration/shared_translation.cpp" line="340" />
+        <source>GLASM (Assembly Shaders, NVIDIA Only)</source>
+        <translation>GLASM (汇编着色器，仅限 NVIDIA 显卡)</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/configuration/shared_translation.cpp" line="341" />
+        <source>SPIR-V (Experimental, AMD/Mesa Only)</source>
+        <translation>SPIR-V (实验性，仅限 AMD/Mesa)</translation>
+    </message>
 </context>
 <context>
     <name>ConfigureApplets</name>
@@ -3737,6 +3926,33 @@ When a guest attempts to open the controller applet, it is immediately closed.</
         <source>Logging</source>
         <translation>日志</translation>
     </message>
+
+    <message>
+        <location filename="../../src/citron/configuration/configure.ui" line="67" />
+        <source>Some settings are only available when a game is not running.</source>
+        <translation>只有当游戏不在运行时，某些设置项才可用。</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/configuration/configure_dialog.cpp" line="66" />
+        <source>Debug</source>
+        <translation>调试</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/configuration/configure_dialog.cpp" line="70" />
+        <source>GraphicsAdvanced</source>
+        <translation>高级图形选项</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/configuration/configure_dialog.cpp" line="72" />
+        <location filename="../../src/citron/configuration/configure_dialog.cpp" line="173" />
+        <source>Controls</source>
+        <translation>控制</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/configuration/configure_dialog.cpp" line="76" />
+        <source>Game List</source>
+        <translation>游戏列表</translation>
+    </message>
 </context>
 <context>
     <name>ConfigureFilesystem</name>
@@ -4121,6 +4337,17 @@ Note: This is a COPY operation. No files will be deleted from your old directori
         <source>Saves have been copied to the Global directory. Your original NAND and Custom folders remain untouched.</source>
         <translation>存档已复制到全局目录。您的原始 NAND 和自定义文件夹保持不变。</translation>
     </message>
+
+    <message>
+        <location filename="../../src/citron/configuration/configure_filesystem.ui" line="17" />
+        <source>Filesystem</source>
+        <translation>文件系统</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/configuration/configure_filesystem.ui" line="201" />
+        <source>Caching</source>
+        <translation>缓存</translation>
+    </message>
 </context>
 <context>
     <name>ConfigureGeneral</name>
@@ -4265,6 +4492,17 @@ Note: This is a COPY operation. No files will be deleted from your old directori
         <location filename="emulator_src/src/citron/configuration/configure_graphics.cpp" line="485" />
         <source>VSync On</source>
         <translation>垂直同步开</translation>
+    </message>
+
+    <message>
+        <location filename="../../src/citron/configuration/configure_graphics.cpp" line="417" />
+        <source>Off</source>
+        <translation>关闭</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/configuration/configure_graphics.cpp" line="423" />
+        <source>On</source>
+        <translation>开启</translation>
     </message>
 </context>
 <context>
@@ -4510,6 +4748,17 @@ Note: This is a COPY operation. No files will be deleted from your old directori
         <location filename="emulator_src/src/citron/configuration/configure_hotkeys.cpp" line="676" />
         <source>The default key sequence is already assigned to: %1</source>
         <translation>默认的按键序列已分配给: %1</translation>
+    </message>
+
+    <message>
+        <location filename="../../src/citron/configuration/configure_hotkeys.cpp" line="340" />
+        <source>Invalid hotkey settings</source>
+        <translation>无效的热键设置</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/configuration/configure_hotkeys.cpp" line="341" />
+        <source>An error occurred. Please report this issue on github.</source>
+        <translation>发生错误。请在 GitHub 提交 Issue。</translation>
     </message>
 </context>
 <context>
@@ -5647,6 +5896,12 @@ To invert the axes, first move your joystick vertically, and then horizontally.<
         <source>UDP Test or calibration configuration is in progress.&lt;br&gt;Please wait for them to finish.</source>
         <translation>UDP 测试或触摸校准正在进行中。&lt;br&gt;请耐心等待。</translation>
     </message>
+
+    <message>
+        <location filename="../../src/citron/configuration/configure_motion_touch.cpp" line="87" />
+        <source>&lt;a href='https://citron-emu.org/wiki/using-a-controller-or-android-phone-for-motion-or-touch-input'&gt;&lt;span style="text-decoration: underline; color:#039be5;"&gt;Learn More&lt;/span&gt;&lt;/a&gt;</source>
+        <translation>&lt;a href='https://citron-emu.org/wiki/using-a-controller-or-android-phone-for-motion-or-touch-input'&gt;&lt;span style="text-decoration: underline; color:#039be5;"&gt;了解更多&lt;/span&gt;&lt;/a&gt;</translation>
+    </message>
 </context>
 <context>
     <name>ConfigureMousePanning</name>
@@ -6666,6 +6921,52 @@ GPU：%2（%3 厂商）
         <source>Close</source>
         <translation>关闭</translation>
     </message>
+
+    <message>
+        <location filename="../../src/citron/configuration/configure_per_game.ui" line="20" />
+        <source>Dialog</source>
+        <translation>对话框</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/configuration/configure_per_game.ui" line="34" />
+        <source>Info</source>
+        <translation>信息</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/configuration/configure_per_game.ui" line="93" />
+        <source>Name</source>
+        <translation>名称</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/configuration/configure_per_game.ui" line="100" />
+        <source>Title ID</source>
+        <translation>游戏 ID</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/configuration/configure_per_game.ui" line="137" />
+        <source>Filename</source>
+        <translation>文件名</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/configuration/configure_per_game.ui" line="164" />
+        <source>Format</source>
+        <translation>格式</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/configuration/configure_per_game.ui" line="171" />
+        <source>Version</source>
+        <translation>版本</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/configuration/configure_per_game.ui" line="178" />
+        <source>Size</source>
+        <translation>大小</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/configuration/configure_per_game.ui" line="185" />
+        <source>Developer</source>
+        <translation>开发商</translation>
+    </message>
 </context>
 <context>
     <name>ConfigurePerGameAddons</name>
@@ -7142,6 +7443,12 @@ UUID: %2</translation>
         <source>...</source>
         <translation>...</translation>
     </message>
+
+    <message>
+        <location filename="../../src/citron/configuration/configure_tas.ui" line="17" />
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Reads controller input from scripts in the same format as TAS-nx scripts.&lt;br/&gt;For a more detailed explanation, please consult the &lt;a href="https://citron-emu.org/help/feature/tas/"&gt;&lt;span style=" text-decoration: underline; color:#039be5;"&gt;help page&lt;/span&gt;&lt;/a&gt; on the citron website.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;通过读取与 TAS-nx 脚本具有相同格式的脚本来读取控制器的输入。&lt;br/&gt;有关详细信息，请参阅 citron 官方网站的&lt;a href="https://citron-emu.org/help/feature/tas/"&gt;&lt;span style=" text-decoration: underline; color:#039be5;"&gt;帮助页面&lt;/span&gt;&lt;/a&gt;。&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
 </context>
 <context>
     <name>ConfigureTasDialog</name>
@@ -7529,6 +7836,12 @@ Drag points to change position, or double-click table cells to edit values.</sou
         <comment>Screenshot width value</comment>
         <translation>自动 (%1 x %2, %3 x %4)</translation>
     </message>
+
+    <message>
+        <location filename="../../src/citron/configuration/configure_ui.ui" line="195" />
+        <source>Screenshots Path: </source>
+        <translation>截图保存位置：</translation>
+    </message>
 </context>
 <context>
     <name>ConfigureVibration</name>
@@ -7697,6 +8010,102 @@ Drag points to change position, or double-click table cells to edit values.</sou
         <source>Token reset successfully</source>
         <comment>Tooltip</comment>
         <translation>令牌重置成功</translation>
+    </message>
+
+    <message>
+        <location filename="../../src/citron/configuration/configure_web.ui" line="31" />
+        <source>By providing your username and token, you agree to allow citron to collect additional usage data, which may include user identifying information.</source>
+        <translation>提供您的用户名和令牌意味着您同意让 citron 收集额外的使用数据，其中可能包括用户识别信息。</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/configuration/configure_web.ui" line="49" />
+        <location filename="../../src/citron/configuration/configure_web.cpp" line="159" />
+        <source>Verify</source>
+        <translation>验证</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/configuration/configure_web.ui" line="128" />
+        <source>Telemetry</source>
+        <translation>使用数据共享</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/configuration/configure_web.ui" line="134" />
+        <source>Share anonymous usage data with the citron team</source>
+        <translation>与 citron 团队共享匿名使用数据</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/configuration/configure_web.ui" line="141" />
+        <source>Learn more</source>
+        <translation>了解更多</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/configuration/configure_web.ui" line="150" />
+        <source>Telemetry ID:</source>
+        <translation>数据 ID：</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/configuration/configure_web.ui" line="166" />
+        <source>Regenerate</source>
+        <translation>重新生成</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/configuration/configure_web.cpp" line="68" />
+        <source>&lt;a href='https://citron-emu.org/help/feature/telemetry/'&gt;&lt;span style="text-decoration: underline; color:#039be5;"&gt;Learn more&lt;/span&gt;&lt;/a&gt;</source>
+        <translation>&lt;a href='https://citron-emu.org/help/feature/telemetry/'&gt;&lt;span style="text-decoration: underline; color:#039be5;"&gt;了解更多&lt;/span&gt;&lt;/a&gt;</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/configuration/configure_web.cpp" line="72" />
+        <source>&lt;a href='https://profile.citron-emu.org/'&gt;&lt;span style="text-decoration: underline; color:#039be5;"&gt;Sign up&lt;/span&gt;&lt;/a&gt;</source>
+        <translation>&lt;a href='https://profile.citron-emu.org/'&gt;&lt;span style="text-decoration: underline; color:#039be5;"&gt;注册&lt;/span&gt;&lt;/a&gt;</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/configuration/configure_web.cpp" line="76" />
+        <source>&lt;a href='https://citron-emu.org/wiki/citron-web-service/'&gt;&lt;span style="text-decoration: underline; color:#039be5;"&gt;What is my token?&lt;/span&gt;&lt;/a&gt;</source>
+        <translation>&lt;a href='https://citron-emu.org/wiki/citron-web-service/'&gt;&lt;span style="text-decoration: underline; color:#039be5;"&gt;我的令牌是？&lt;/span&gt;&lt;/a&gt;</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/configuration/configure_web.cpp" line="80" />
+        <location filename="../../src/citron/configuration/configure_web.cpp" line="125" />
+        <source>Telemetry ID: 0x%1</source>
+        <translation>数据 ID: 0x%1</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/configuration/configure_web.cpp" line="117" />
+        <source>Token not verified</source>
+        <translation>令牌未被验证</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/configuration/configure_web.cpp" line="118" />
+        <source>Token was not verified. The change to your token has not been saved.</source>
+        <translation>令牌未被验证。您对用户名和令牌的更改尚未保存。</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/configuration/configure_web.cpp" line="141" />
+        <comment>Tooltip</comment>
+        <source>Unverified, please click Verify before saving configuration</source>
+        <translation>令牌未验证，请在保存配置前先进行验证。</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/configuration/configure_web.cpp" line="147" />
+        <location filename="../../src/citron/configuration/configure_web.cpp" line="149" />
+        <source>Verifying...</source>
+        <translation>验证中...</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/configuration/configure_web.cpp" line="164" />
+        <comment>Tooltip</comment>
+        <source>Verified</source>
+        <translation>已验证</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/configuration/configure_web.cpp" line="171" />
+        <source>Verification failed</source>
+        <translation>验证失败</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/configuration/configure_web.cpp" line="172" />
+        <source>Verification failed. Check that you have entered your token correctly, and that your internet connection is working.</source>
+        <translation>验证失败。请检查您输入的令牌是否正确，并且确保您的互联网连接正常。</translation>
     </message>
 </context>
 <context>
@@ -9734,6 +10143,90 @@ Would you like to bypass this and exit anyway?</source>
         <source>Install Complete</source>
         <translation>安装完成</translation>
     </message>
+
+    <message>
+        <location filename="../../src/citron/main.cpp" line="214" />
+        <source>&lt;a href='https://citron-emu.org/help/feature/telemetry/'&gt;Anonymous data is collected&lt;/a&gt; to help improve citron. &lt;br/&gt;&lt;br/&gt;Would you like to share your usage data with us?</source>
+        <translation>&lt;a href='https://citron-emu.org/help/feature/telemetry/'&gt;我们收集匿名数据&lt;/a&gt;来帮助改进 citron 。&lt;br/&gt;&lt;br/&gt;您愿意和我们分享您的使用数据吗？</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/main.cpp" line="217" />
+        <source>Telemetry</source>
+        <translation>使用数据共享</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/main.cpp" line="451" />
+        <source>Vulkan initialization failed during boot.&lt;br&gt;&lt;br&gt;Click &lt;a href='https://citron-emu.org/wiki/faq/#citron-starts-with-the-error-broken-vulkan-installation-detected'&gt;here for instructions to fix the issue&lt;/a&gt;.</source>
+        <translation>Vulkan 初始化失败。&lt;br&gt;&lt;br&gt;点击&lt;a href='https://citron-emu.org/wiki/faq/#citron-starts-with-the-error-broken-vulkan-installation-detected'&gt;这里&lt;/a&gt;获取此问题的相关信息。</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/main.cpp" line="1818" />
+        <source>You are using the deconstructed ROM directory format for this game, which is an outdated format that has been superseded by others such as NCA, NAX, XCI, or NSP. Deconstructed ROM directories lack icons, metadata, and update support.&lt;br&gt;&lt;br&gt;For an explanation of the various Switch formats citron supports, &lt;a href='https://citron-emu.org/wiki/overview-of-switch-game-formats'&gt;check out our wiki&lt;/a&gt;. This message will not be shown again.</source>
+        <translation>目前使用的游戏为解体的 ROM 目录格式，这是一种过时的格式，已被其他格式替代，如 NCA，NAX，XCI 或 NSP。解体的 ROM 目录缺少图标、元数据和更新支持。&lt;br&gt;&lt;br&gt;有关 citron 支持的各种 Switch 格式的说明，&lt;a href='https://citron-emu.org/wiki/overview-of-switch-game-formats'&gt;请查看我们的 wiki&lt;/a&gt;。此消息将不会再次出现。</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/main.cpp" line="1836" />
+        <source>citron has encountered an error while running the video core. This is usually caused by outdated GPU drivers, including integrated ones. Please see the log for more details. For more information on accessing the log, please see the following page: &lt;a href='https://citron-emu.org/help/reference/log-files/'&gt;How to Upload the Log File&lt;/a&gt;. </source>
+        <translation>citron 在运行视频核心时发生错误。这可能是由 GPU 驱动程序过旧造成的。有关详细信息，请参阅日志文件。关于日志文件的更多信息，请参考以下页面：&lt;a href='https://citron-emu.org/help/reference/log-files/'&gt;如何上传日志文件&lt;/a&gt;。</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/main.cpp" line="1854" />
+        <comment>%1 signifies an error string.</comment>
+        <source>%1&lt;br&gt;Please follow &lt;a href='https://citron-emu.org/help/quickstart/'&gt;the citron quickstart guide&lt;/a&gt; to redump your files.&lt;br&gt;You can refer to the citron wiki&lt;/a&gt; or the citron Discord&lt;/a&gt; for help.</source>
+        <translation>%1&lt;br&gt;请参考&lt;a href='https://citron-emu.org/help/quickstart/'&gt;citron 快速导航&lt;/a&gt;以获取相关文件。&lt;br&gt;您可以参考 citron 的 wiki 页面&lt;/a&gt;或 Discord 社区&lt;/a&gt;以获得帮助。</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/main.cpp" line="2536" />
+        <source>Delete OpenGL Transferable Shader Cache?</source>
+        <translation>删除 OpenGL 模式的着色器缓存？</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/main.cpp" line="3552" />
+        <location filename="../../src/citron/main.cpp" line="3571" />
+        <source>Hardware requirements not met</source>
+        <translation>硬件不满足要求</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/main.cpp" line="3553" />
+        <location filename="../../src/citron/main.cpp" line="3572" />
+        <source>Your system does not meet the recommended hardware requirements. Compatibility reporting has been disabled.</source>
+        <translation>您的系统不满足运行 citron 的推荐配置。兼容性报告已被禁用。</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/main.cpp" line="3564" />
+        <source>Missing citron Account</source>
+        <translation>未设置 citron 账户</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/main.cpp" line="3565" />
+        <source>In order to submit a game compatibility test case, you must link your citron account.&lt;br&gt;&lt;br/&gt;To link your citron account, go to Emulation &amp;gt; Configuration &amp;gt; Web.</source>
+        <translation>要提交游戏兼容性测试用例，您必须设置您的 citron 帐户。&lt;br&gt;&lt;br/&gt;要设置您的 citron 帐户，请转到模拟 &amp;gt; 设置 &amp;gt; 网络。</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/main.cpp" line="4795" />
+        <source>Encryption keys are missing. &lt;br&gt;Please follow &lt;a href='https://citron-emu.org/help/quickstart/'&gt;the citron quickstart guide&lt;/a&gt; to get all your keys, firmware and games.</source>
+        <translation>密钥缺失。&lt;br&gt;请查看&lt;a href='https://citron-emu.org/help/quickstart/'&gt;citron 快速导航&lt;/a&gt;以获得你的密钥、固件和游戏。</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/configuration/shared_translation.h" line="58" />
+        <source>OpenGL</source>
+        <translation>OpenGL</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/configuration/shared_translation.h" line="63" />
+        <source>GLSL</source>
+        <translation>GLSL</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/configuration/shared_translation.h" line="64" />
+        <source>GLASM</source>
+        <translation>GLASM</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/configuration/shared_translation.h" line="65" />
+        <source>SPIRV</source>
+        <translation>SPIRV</translation>
+    </message>
 </context>
 <context>
     <name>GameBananaDialog</name>
@@ -10692,6 +11185,17 @@ If you do not have one, this feature will not work. Would you like to proceed?</
         <source>No games available to choose from!</source>
         <translation>没有可选择的游戏！</translation>
     </message>
+
+    <message>
+        <location filename="../../src/citron/game_list.cpp" line="559" />
+        <source>Remove OpenGL Pipeline Cache</source>
+        <translation>删除 OpenGL 着色器缓存</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/game_list.cpp" line="569" />
+        <source>Navigate to GameDB entry</source>
+        <translation>查看兼容性报告</translation>
+    </message>
 </context>
 <context>
     <name>GameListDelegate</name>
@@ -10913,6 +11417,14 @@ Debug Message: </source>
         <translation>向公共大厅发布房间失败。要公开主持房间，您必须在 模拟 -&gt; 配置 -&gt; 网络 中配置已生成的令牌。如果您不想在公共大厅发布房间，请选择“不列出”。
 
 调试信息：</translation>
+    </message>
+
+    <message>
+        <location filename="../../src/citron/multiplayer/host_room.cpp" line="186" />
+        <source>Failed to announce the room to the public lobby. In order to host a room publicly, you must have a valid citron account configured in Emulation -&gt; Configure -&gt; Web. If you do not want to publish a room in the public lobby, then select Unlisted instead.
+Debug Message: </source>
+        <translation>向公共大厅创建房间时失败。为了创建公共房间，您必须在模拟 -&gt; 设置 -&gt; 网络中配置有效的 citron 帐户。如果不想在公共大厅中创建房间，请选择“私有”。
+调试消息：</translation>
     </message>
 </context>
 <context>
@@ -11219,6 +11731,32 @@ Debug Message: </source>
         <source>Building Shaders...</source>
         <translation>正在构建着色器...</translation>
     </message>
+
+    <message>
+        <location filename="../../src/citron/loading_screen.ui" line="84" />
+        <source>Loading Shaders 387 / 1628</source>
+        <translation>正在加载着色器: 387 / 1628</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/loading_screen.ui" line="121" />
+        <source>Loading Shaders %v out of %m</source>
+        <translation>正在加载着色器: %v / %m</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/loading_screen.ui" line="135" />
+        <source>Estimated Time 5m 4s</source>
+        <translation>所需时间: 5 分 4 秒</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/loading_screen.cpp" line="84" />
+        <source>Loading Shaders %1 / %2</source>
+        <translation>正在加载着色器: %1 / %2</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/loading_screen.cpp" line="170" />
+        <source>Estimated Time %1</source>
+        <translation>所需时间: %1</translation>
+    </message>
 </context>
 <context>
     <name>Lobby</name>
@@ -11308,6 +11846,27 @@ Debug Message: </source>
         <location filename="emulator_src/src/citron/multiplayer/lobby.cpp" line="454" />
         <source>Refreshing</source>
         <translation>刷新中</translation>
+    </message>
+
+    <message>
+        <location filename="../../src/citron/multiplayer/lobby.ui" line="66" />
+        <source>Search</source>
+        <translation>搜索</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/multiplayer/lobby.ui" line="83" />
+        <source>Hide Empty Rooms</source>
+        <translation>隐藏空房间</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/multiplayer/lobby.ui" line="90" />
+        <source>Hide Full Rooms</source>
+        <translation>隐藏满员的房间</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/multiplayer/lobby.ui" line="110" />
+        <source>Refresh Lobby</source>
+        <translation>刷新游戏大厅</translation>
     </message>
 </context>
 <context>
@@ -11690,6 +12249,27 @@ Debug Message: </source>
         <location filename="emulator_src/src/citron/main.ui" line="565" />
         <source>Open &amp;Setup Wizard...</source>
         <translation>打开设置向导(&amp;S)...</translation>
+    </message>
+
+    <message>
+        <location filename="../../src/citron/main.ui" line="244" />
+        <source>&amp;About citron</source>
+        <translation>关于 citron (&amp;A)</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/main.ui" line="364" />
+        <source>Open &amp;Mods Page</source>
+        <translation>打开 Mod 页面 (&amp;M)</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/main.ui" line="369" />
+        <source>Open &amp;Quickstart Guide</source>
+        <translation>查看快速导航 (&amp;Q)</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/main.ui" line="374" />
+        <source>&amp;FAQ</source>
+        <translation>FAQ (&amp;F)</translation>
     </message>
 </context>
 <context>
@@ -12281,6 +12861,111 @@ Proceed anyway?</source>
         <location filename="emulator_src/src/citron/multiplayer/message.cpp" line="82" />
         <source>You are about to leave the room. Any network connections will be closed.</source>
         <translation>您正要离开房间。所有的网络连接都将关闭。</translation>
+    </message>
+
+    <message>
+        <location filename="../../src/citron/multiplayer/message.cpp" line="11" />
+        <source>Username is not valid. Must be 4 to 20 alphanumeric characters.</source>
+        <translation>用户名无效。必须是 4 - 20 个数字和英文字符。</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/multiplayer/message.cpp" line="13" />
+        <source>Room name is not valid. Must be 4 to 20 alphanumeric characters.</source>
+        <translation>房间名称无效。必须是 4 - 20 个数字和英文字符。</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/multiplayer/message.cpp" line="15" />
+        <source>Username is already in use or not valid. Please choose another.</source>
+        <translation>用户名无效或已被他人使用。请选择其他的用户名。</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/multiplayer/message.cpp" line="17" />
+        <source>IP is not a valid IPv4 address.</source>
+        <translation>此 IP 不是有效的 IPv4 地址。</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/multiplayer/message.cpp" line="19" />
+        <source>Port must be a number between 0 to 65535.</source>
+        <translation>端口号必须位于 0 至 65535 之间。</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/multiplayer/message.cpp" line="20" />
+        <source>You must choose a Preferred Game to host a room. If you do not have any games in your game list yet, add a game folder by clicking on the plus icon in the game list.</source>
+        <translation>创建房间需要确定首选游戏。如果您的游戏列表中没有任何游戏，请单击游戏列表的加号图标添加游戏文件夹。</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/multiplayer/message.cpp" line="24" />
+        <source>Unable to find an internet connection. Check your internet settings.</source>
+        <translation>找不到网络连接。请检查您的网络设置。</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/multiplayer/message.cpp" line="26" />
+        <source>Unable to connect to the host. Verify that the connection settings are correct. If you still cannot connect, contact the room host and verify that the host is properly configured with the external port forwarded.</source>
+        <translation>无法连接到服务器。请验证连接是否正确无误。如果仍然无法连接，请联系房主，并验证服务器是否正确配置了外部端口。</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/multiplayer/message.cpp" line="30" />
+        <source>Unable to connect to the room because it is already full.</source>
+        <translation>无法连接到该房间，因为该房间已满员。</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/multiplayer/message.cpp" line="32" />
+        <source>Creating a room failed. Please retry. Restarting citron might be necessary.</source>
+        <translation>房间创建失败。请重试并重新启动 citron。</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/multiplayer/message.cpp" line="34" />
+        <source>The host of the room has banned you. Speak with the host to unban you or try a different room.</source>
+        <translation>此房间的主人已将您封禁。请联系房主进行解封或选择其他房间。</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/multiplayer/message.cpp" line="37" />
+        <source>Version mismatch! Please update to the latest version of citron. If the problem persists, contact the room host and ask them to update the server.</source>
+        <translation>版本过低！请更新 citron 至最新版本。如果问题仍然存在，请联系告知房主更新服务器。</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/multiplayer/message.cpp" line="39" />
+        <source>Incorrect password.</source>
+        <translation>密码错误。</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/multiplayer/message.cpp" line="40" />
+        <source>An unknown error occurred. If this error continues to occur, please open an issue</source>
+        <translation>发生未知错误。如果此错误依然存在，请及时反馈问题。</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/multiplayer/message.cpp" line="43" />
+        <source>Connection to room lost. Try to reconnect.</source>
+        <translation>与房间的连接丢失。请尝试重新连接。</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/multiplayer/message.cpp" line="45" />
+        <source>You have been kicked by the room host.</source>
+        <translation>您已被房主踢出房间。</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/multiplayer/message.cpp" line="47" />
+        <source>IP address is already in use. Please choose another.</source>
+        <translation>此 IP 地址已在使用中。请选择其他地址。</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/multiplayer/message.cpp" line="49" />
+        <source>You do not have enough permission to perform this action.</source>
+        <translation>您没有足够的权限执行此操作。</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/multiplayer/message.cpp" line="50" />
+        <source>The user you are trying to kick/ban could not be found.
+They may have left the room.</source>
+        <translation>找不到您试图踢出房间/封禁的用户。
+他们可能已经离开了房间。</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/multiplayer/message.cpp" line="52" />
+        <source>No valid network interface is selected.
+Please go to Configure -&gt; System -&gt; Network and make a selection.</source>
+        <translation>未选择有效的网络接口。
+请于设置 -&gt; 系统 -&gt; 网络中进行相关设置。</translation>
     </message>
 </context>
 <context>
@@ -13998,4 +14683,58 @@ Setting to Handheld can help improve performance for low end systems.</source><t
 Enabling it bypasses such prompts and directly exits the emulation.</source><translation>此设置将覆盖游戏中确认停止游戏的提示。
 启用此项将绕过游戏中的提示并直接退出模拟。</translation></message><message><source>Hide mouse on inactivity</source><translation>自动隐藏鼠标光标</translation></message><message><source>This setting hides the mouse after 2.5s of inactivity.</source><translation>当鼠标停止活动超过 2.5 秒时隐藏鼠标光标。</translation></message><message><source>Disable controller applet</source><translation>禁用控制器小程序</translation></message><message><source>Forcibly disables the use of the controller applet by guests.
 When a guest attempts to open the controller applet, it is immediately closed.</source><translation>强制禁用来宾程序使用控制器小程序。
-当来宾程序尝试打开控制器小程序时，控制器小程序会立即关闭。</translation></message><message><source>Enable Gamemode</source><translation>启用游戏模式</translation></message><message><source>Custom frontend</source><translation>自定义前端</translation></message><message><source>Real applet</source><translation>真实的小程序</translation></message><message><source>CPU</source><translation>CPU</translation></message><message><source>GPU</source><translation>GPU</translation></message><message><source>CPU Asynchronous</source><translation>CPU 异步模拟</translation></message><message><source>Uncompressed (Best quality)</source><translation>不压缩 (最高质量)</translation></message><message><source>BC1 (Low quality)</source><translation>BC1 (低质量)</translation></message><message><source>BC3 (Medium quality)</source><translation>BC3 (中等质量)</translation></message><message><source>Conservative</source><translation>保守模式</translation></message><message><source>Aggressive</source><translation>激进模式</translation></message><message><source>Disabled</source><translation>已禁用</translation></message><message><source>EDS1</source><translation>EDS1</translation></message><message><source>EDS2</source><translation>EDS2</translation></message><message><source>EDS3</source><translation>EDS3</translation></message><message><source>Off (Not Recommended)</source><translation>关闭（不推荐）</translation></message><message><source>Light (Recommended)</source><translation>轻度（推荐）</translation></message><message><source>Vulkan</source><translation>Vulkan</translation></message><message><source>Null</source><translation>无</translation></message><message><source>Low</source><translation>低</translation></message><message><source>Normal</source><translation>正常</translation></message><message><source>High</source><translation>高</translation></message><message><source>Extreme</source><translation>极高</translation></message><message><source>Auto</source><translation>自动</translation></message><message><source>Accurate</source><translation>高精度</translation></message><message><source>Unsafe</source><translation>低精度</translation></message><message><source>Paranoid (disables most optimizations)</source><translation>偏执模式 (禁用绝大多数优化项)</translation></message><message><source>Ultra Low (aggressive, may break some games)</source><translation>超低（激进，可能破坏某些游戏）</translation></message><message><source>Dynarmic</source><translation>动态编译</translation></message><message><source>NCE</source><translation>本机代码执行</translation></message><message><source>Borderless Windowed</source><translation>无边框窗口</translation></message><message><source>Exclusive Fullscreen</source><translation>独占全屏</translation></message><message><source>No Video Output</source><translation>无视频输出</translation></message><message><source>CPU Video Decoding</source><translation>CPU 视频解码</translation></message><message><source>GPU Video Decoding (Default)</source><translation>GPU 视频解码 (默认)</translation></message><message><source>0.25X (180p/270p) [EXPERIMENTAL]</source><translation>0.25X (180p/270p) [实验性]</translation></message><message><source>0.5X (360p/540p) [EXPERIMENTAL]</source><translation>0.5X (360p/540p) [实验性]</translation></message><message><source>0.75X (540p/810p) [EXPERIMENTAL]</source><translation>0.75X (540p/810p) [实验性]</translation></message><message><source>1X (720p/1080p)</source><translation>1X (720p/1080p)</translation></message><message><source>1.25X (900p/1350p) [EXPERIMENTAL]</source><translation>1.25X (900p/1350p) [实验性]</translation></message><message><source>1.5X (1080p/1620p) [EXPERIMENTAL]</source><translation>1.5X (1080p/1620p) [实验性]</translation></message><message><source>1.75X (1260p/1890p) [EXPERIMENTAL]</source><translation>1.75X (1260p/1890p) [实验性]</translation></message><message><source>2X (1440p/2160p)</source><translation>2X (1440p/2160p)</translation></message><message><source>3X (2160p/3240p)</source><translation>3X (2160p/3240p)</translation></message><message><source>4X (2880p/4320p)</source><translation>4X (2880p/4320p)</translation></message><message><source>5X (3600p/5400p)</source><translation>5X (3600p/5400p)</translation></message><message><source>6X (4320p/6480p)</source><translation>6X (4320p/6480p)</translation></message><message><source>7X (5040p/7560p)</source><translation>7X (5040p/7560p)</translation></message><message><source>8X (5760p/8640p)</source><translation>8X (5760p/8640p)</translation></message><message><source>Nearest Neighbor</source><translation>近邻取样</translation></message><message><source>Bilinear</source><translation>双线性过滤</translation></message><message><source>Bicubic</source><translation>双三线过滤</translation></message><message><source>Lanczos</source><translation>Lanczos</translation></message><message><source>Gaussian</source><translation>高斯模糊</translation></message><message><source>ScaleForce</source><translation>强制缩放</translation></message><message><source>ScaleFX</source><translation>ScaleFX</translation></message><message><source>AMD FidelityFX™️ Super Resolution</source><translation>AMD FidelityFX™️ 超级分辨率锐画技术</translation></message><message><source>AMD FidelityFX™️ Super Resolution 2.0</source><translation>AMD FidelityFX™️ Super Resolution 2.0</translation></message><message><source>CRT EasyMode</source><translation>CRT EasyMode</translation></message><message><source>CRT Royale</source><translation>CRT Royale</translation></message><message><source>CAS (Contrast Adaptive Sharpening)</source><translation>CAS（对比度自适应锐化）</translation></message><message><source>None</source><translation>无</translation></message><message><source>FXAA</source><translation>快速近似抗锯齿</translation></message><message><source>SMAA</source><translation>子像素形态学抗锯齿</translation></message><message><source>TAA</source><translation>TAA</translation></message><message><source>Quality</source><translation>质量</translation></message><message><source>Balanced</source><translation>均衡</translation></message><message><source>Performance</source><translation>性能</translation></message><message><source>Ultra Performance</source><translation>超高性能</translation></message><message><source>Enabled</source><translation>已启用</translation></message><message><source>Adaptive</source><translation>自适应</translation></message><message><source>Fixed</source><translation>固定</translation></message><message><source>Default (16:9)</source><translation>默认 (16:9)</translation></message><message><source>Force 4:3</source><translation>强制 4:3</translation></message><message><source>Force 21:9</source><translation>强制 21:9</translation></message><message><source>Force 16:10</source><translation>强制 16:10</translation></message><message><source>Force 32:9</source><translation>强制 32:9</translation></message><message><source>Stretch to Window</source><translation>拉伸窗口</translation></message><message><source>Automatic</source><translation>自动</translation></message><message><source>Default</source><translation>系统默认</translation></message><message><source>2x</source><translation>2x</translation></message><message><source>4x</source><translation>4x</translation></message><message><source>8x</source><translation>8x</translation></message><message><source>16x</source><translation>16x</translation></message><message><source>32x</source><translation>32x</translation></message><message><source>64x</source><translation>64x</translation></message><message><source>128x</source><translation>128x</translation></message><message><source>256x</source><translation>256x</translation></message><message><source>512x</source><translation>512x</translation></message><message><source>1024x</source><translation>1024x</translation></message><message><source>2048x</source><translation>2048x</translation></message><message><source>4096x</source><translation>4096x</translation></message><message><source>8192x</source><translation>8192x</translation></message><message><source>16384x</source><translation>16384x</translation></message><message><source>32768x</source><translation>32768x</translation></message><message><source>65536x</source><translation>65536x</translation></message><message><source>131072x</source><translation>131072x</translation></message><message><source>262144x</source><translation>262144x</translation></message><message><source>524288x</source><translation>524288x</translation></message><message><source>1048576x</source><translation>1048576x</translation></message><message><source>2097152x</source><translation>2097152x</translation></message><message><source>4194304x</source><translation>4194304x</translation></message><message><source>Japanese (日本語)</source><translation>日语 (日本語)</translation></message><message><source>American English</source><translation>美式英语</translation></message><message><source>French (français)</source><translation>法语 (français)</translation></message><message><source>German (Deutsch)</source><translation>德语 (Deutsch)</translation></message><message><source>Italian (italiano)</source><translation>意大利语 (italiano)</translation></message><message><source>Spanish (español)</source><translation>西班牙语 (español)</translation></message><message><source>Chinese</source><translation>中文</translation></message><message><source>Korean (한국어)</source><translation>韩语 (한국어)</translation></message><message><source>Dutch (Nederlands)</source><translation>荷兰语 (Nederlands)</translation></message><message><source>Portuguese (português)</source><translation>葡萄牙语 (português)</translation></message><message><source>Russian (Русский)</source><translation>俄语 (Русский)</translation></message><message><source>Taiwanese</source><translation>台湾中文</translation></message><message><source>British English</source><translation>英式英语</translation></message><message><source>Canadian French</source><translation>加拿大法语</translation></message><message><source>Latin American Spanish</source><translation>拉美西班牙语</translation></message><message><source>Simplified Chinese</source><translation>简体中文</translation></message><message><source>Traditional Chinese (正體中文)</source><translation>繁体中文 (正體中文)</translation></message><message><source>Brazilian Portuguese (português do Brasil)</source><translation>巴西-葡萄牙语 (português do Brasil)</translation></message><message><source>Japan</source><translation>日本</translation></message><message><source>USA</source><translation>美国</translation></message><message><source>Europe</source><translation>欧洲</translation></message><message><source>Australia</source><translation>澳大利亚</translation></message><message><source>China</source><translation>中国</translation></message><message><source>Korea</source><translation>韩国</translation></message><message><source>Taiwan</source><translation>中国台湾</translation></message><message><source>Auto (%1)</source><comment>Auto select time zone</comment><translation>自动 (%1)</translation></message><message><source>Default (%1)</source><comment>Default time zone</comment><translation>默认 (%1)</translation></message><message><source>CET</source><translation>欧洲中部时间</translation></message><message><source>CST6CDT</source><translation>古巴标准时间&amp;古巴夏令时</translation></message><message><source>Cuba</source><translation>古巴</translation></message><message><source>EET</source><translation>东欧时间</translation></message><message><source>Egypt</source><translation>埃及</translation></message><message><source>Eire</source><translation>爱尔兰</translation></message><message><source>EST</source><translation>东部标准时间</translation></message><message><source>EST5EDT</source><translation>东部标准时间&amp;东部夏令时</translation></message><message><source>GB</source><translation>英国</translation></message><message><source>GB-Eire</source><translation>英国-爱尔兰时间</translation></message><message><source>GMT</source><translation>格林威治标准时间 (GMT)</translation></message><message><source>GMT+0</source><translation>GMT+0</translation></message><message><source>GMT-0</source><translation>GMT-0</translation></message><message><source>GMT0</source><translation>GMT0</translation></message><message><source>Greenwich</source><translation>格林威治</translation></message><message><source>Hongkong</source><translation>中国香港</translation></message><message><source>HST</source><translation>美国夏威夷时间</translation></message><message><source>Iceland</source><translation>冰岛</translation></message><message><source>Iran</source><translation>伊朗</translation></message><message><source>Israel</source><translation>以色列</translation></message><message><source>Jamaica</source><translation>牙买加</translation></message><message><source>Kwajalein</source><translation>夸贾林环礁</translation></message><message><source>Libya</source><translation>利比亚</translation></message><message><source>MET</source><translation>中欧时间</translation></message><message><source>MST</source><translation>山区标准时间 (北美)</translation></message><message><source>MST7MDT</source><translation>山区标准时间&amp;山区夏令时 (北美)</translation></message><message><source>Navajo</source><translation>纳瓦霍</translation></message><message><source>NZ</source><translation>新西兰时间</translation></message><message><source>NZ-CHAT</source><translation>新西兰-查塔姆群岛</translation></message><message><source>Poland</source><translation>波兰</translation></message><message><source>Portugal</source><translation>葡萄牙</translation></message><message><source>PRC</source><translation>中国标准时间</translation></message><message><source>PST8PDT</source><translation>太平洋标准时间&amp;太平洋夏令时</translation></message><message><source>ROC</source><translation>台湾时间</translation></message><message><source>ROK</source><translation>韩国时间</translation></message><message><source>Singapore</source><translation>新加坡</translation></message><message><source>Turkey</source><translation>土耳其</translation></message><message><source>UCT</source><translation>UCT</translation></message><message><source>Universal</source><translation>世界时间</translation></message><message><source>UTC</source><translation>协调世界时</translation></message><message><source>W-SU</source><translation>欧洲-莫斯科时间</translation></message><message><source>WET</source><translation>西欧时间</translation></message><message><source>Zulu</source><translation>祖鲁</translation></message><message><source>Mono</source><translation>单声道</translation></message><message><source>Stereo</source><translation>立体声</translation></message><message><source>Surround</source><translation>环绕声</translation></message><message><source>4GB DRAM (Default)</source><translation>4GB DRAM (默认)</translation></message><message><source>6GB DRAM (Unsafe)</source><translation>6GB DRAM (不安全)</translation></message><message><source>8GB DRAM (Unsafe)</source><translation>8GB DRAM (不安全)</translation></message><message><source>10GB DRAM (Unsafe)</source><translation>10GB DRAM (不安全)</translation></message><message><source>12GB DRAM (Unsafe)</source><translation>12GB DRAM (不安全)</translation></message><message><source>14GB DRAM (Unsafe)</source><translation>14GB DRAM (不安全)</translation></message><message><source>16GB DRAM (Unsafe)</source><translation>16GB DRAM (不安全)</translation></message><message><source>Docked</source><translation>主机模式</translation></message><message><source>Handheld</source><translation>掌机模式</translation></message><message><source>Always ask (Default)</source><translation>总是询问 (默认)</translation></message><message><source>Only if game specifies not to stop</source><translation>仅当游戏不希望停止时</translation></message><message><source>Never ask</source><translation>从不询问</translation></message><message><source>Off</source><translation>关闭</translation></message></context></TS>
+当来宾程序尝试打开控制器小程序时，控制器小程序会立即关闭。</translation></message><message><source>Enable Gamemode</source><translation>启用游戏模式</translation></message><message><source>Custom frontend</source><translation>自定义前端</translation></message><message><source>Real applet</source><translation>真实的小程序</translation></message><message><source>CPU</source><translation>CPU</translation></message><message><source>GPU</source><translation>GPU</translation></message><message><source>CPU Asynchronous</source><translation>CPU 异步模拟</translation></message><message><source>Uncompressed (Best quality)</source><translation>不压缩 (最高质量)</translation></message><message><source>BC1 (Low quality)</source><translation>BC1 (低质量)</translation></message><message><source>BC3 (Medium quality)</source><translation>BC3 (中等质量)</translation></message><message><source>Conservative</source><translation>保守模式</translation></message><message><source>Aggressive</source><translation>激进模式</translation></message><message><source>Disabled</source><translation>已禁用</translation></message><message><source>EDS1</source><translation>EDS1</translation></message><message><source>EDS2</source><translation>EDS2</translation></message><message><source>EDS3</source><translation>EDS3</translation></message><message><source>Off (Not Recommended)</source><translation>关闭（不推荐）</translation></message><message><source>Light (Recommended)</source><translation>轻度（推荐）</translation></message><message><source>Vulkan</source><translation>Vulkan</translation></message><message><source>Null</source><translation>无</translation></message><message><source>Low</source><translation>低</translation></message><message><source>Normal</source><translation>正常</translation></message><message><source>High</source><translation>高</translation></message><message><source>Extreme</source><translation>极高</translation></message><message><source>Auto</source><translation>自动</translation></message><message><source>Accurate</source><translation>高精度</translation></message><message><source>Unsafe</source><translation>低精度</translation></message><message><source>Paranoid (disables most optimizations)</source><translation>偏执模式 (禁用绝大多数优化项)</translation></message><message><source>Ultra Low (aggressive, may break some games)</source><translation>超低（激进，可能破坏某些游戏）</translation></message><message><source>Dynarmic</source><translation>动态编译</translation></message><message><source>NCE</source><translation>本机代码执行</translation></message><message><source>Borderless Windowed</source><translation>无边框窗口</translation></message><message><source>Exclusive Fullscreen</source><translation>独占全屏</translation></message><message><source>No Video Output</source><translation>无视频输出</translation></message><message><source>CPU Video Decoding</source><translation>CPU 视频解码</translation></message><message><source>GPU Video Decoding (Default)</source><translation>GPU 视频解码 (默认)</translation></message><message><source>0.25X (180p/270p) [EXPERIMENTAL]</source><translation>0.25X (180p/270p) [实验性]</translation></message><message><source>0.5X (360p/540p) [EXPERIMENTAL]</source><translation>0.5X (360p/540p) [实验性]</translation></message><message><source>0.75X (540p/810p) [EXPERIMENTAL]</source><translation>0.75X (540p/810p) [实验性]</translation></message><message><source>1X (720p/1080p)</source><translation>1X (720p/1080p)</translation></message><message><source>1.25X (900p/1350p) [EXPERIMENTAL]</source><translation>1.25X (900p/1350p) [实验性]</translation></message><message><source>1.5X (1080p/1620p) [EXPERIMENTAL]</source><translation>1.5X (1080p/1620p) [实验性]</translation></message><message><source>1.75X (1260p/1890p) [EXPERIMENTAL]</source><translation>1.75X (1260p/1890p) [实验性]</translation></message><message><source>2X (1440p/2160p)</source><translation>2X (1440p/2160p)</translation></message><message><source>3X (2160p/3240p)</source><translation>3X (2160p/3240p)</translation></message><message><source>4X (2880p/4320p)</source><translation>4X (2880p/4320p)</translation></message><message><source>5X (3600p/5400p)</source><translation>5X (3600p/5400p)</translation></message><message><source>6X (4320p/6480p)</source><translation>6X (4320p/6480p)</translation></message><message><source>7X (5040p/7560p)</source><translation>7X (5040p/7560p)</translation></message><message><source>8X (5760p/8640p)</source><translation>8X (5760p/8640p)</translation></message><message><source>Nearest Neighbor</source><translation>近邻取样</translation></message><message><source>Bilinear</source><translation>双线性过滤</translation></message><message><source>Bicubic</source><translation>双三线过滤</translation></message><message><source>Lanczos</source><translation>Lanczos</translation></message><message><source>Gaussian</source><translation>高斯模糊</translation></message><message><source>ScaleForce</source><translation>强制缩放</translation></message><message><source>ScaleFX</source><translation>ScaleFX</translation></message><message><source>AMD FidelityFX™️ Super Resolution</source><translation>AMD FidelityFX™️ 超级分辨率锐画技术</translation></message><message><source>AMD FidelityFX™️ Super Resolution 2.0</source><translation>AMD FidelityFX™️ Super Resolution 2.0</translation></message><message><source>CRT EasyMode</source><translation>CRT EasyMode</translation></message><message><source>CRT Royale</source><translation>CRT Royale</translation></message><message><source>CAS (Contrast Adaptive Sharpening)</source><translation>CAS（对比度自适应锐化）</translation></message><message><source>None</source><translation>无</translation></message><message><source>FXAA</source><translation>快速近似抗锯齿</translation></message><message><source>SMAA</source><translation>子像素形态学抗锯齿</translation></message><message><source>TAA</source><translation>TAA</translation></message><message><source>Quality</source><translation>质量</translation></message><message><source>Balanced</source><translation>均衡</translation></message><message><source>Performance</source><translation>性能</translation></message><message><source>Ultra Performance</source><translation>超高性能</translation></message><message><source>Enabled</source><translation>已启用</translation></message><message><source>Adaptive</source><translation>自适应</translation></message><message><source>Fixed</source><translation>固定</translation></message><message><source>Default (16:9)</source><translation>默认 (16:9)</translation></message><message><source>Force 4:3</source><translation>强制 4:3</translation></message><message><source>Force 21:9</source><translation>强制 21:9</translation></message><message><source>Force 16:10</source><translation>强制 16:10</translation></message><message><source>Force 32:9</source><translation>强制 32:9</translation></message><message><source>Stretch to Window</source><translation>拉伸窗口</translation></message><message><source>Automatic</source><translation>自动</translation></message><message><source>Default</source><translation>系统默认</translation></message><message><source>2x</source><translation>2x</translation></message><message><source>4x</source><translation>4x</translation></message><message><source>8x</source><translation>8x</translation></message><message><source>16x</source><translation>16x</translation></message><message><source>32x</source><translation>32x</translation></message><message><source>64x</source><translation>64x</translation></message><message><source>128x</source><translation>128x</translation></message><message><source>256x</source><translation>256x</translation></message><message><source>512x</source><translation>512x</translation></message><message><source>1024x</source><translation>1024x</translation></message><message><source>2048x</source><translation>2048x</translation></message><message><source>4096x</source><translation>4096x</translation></message><message><source>8192x</source><translation>8192x</translation></message><message><source>16384x</source><translation>16384x</translation></message><message><source>32768x</source><translation>32768x</translation></message><message><source>65536x</source><translation>65536x</translation></message><message><source>131072x</source><translation>131072x</translation></message><message><source>262144x</source><translation>262144x</translation></message><message><source>524288x</source><translation>524288x</translation></message><message><source>1048576x</source><translation>1048576x</translation></message><message><source>2097152x</source><translation>2097152x</translation></message><message><source>4194304x</source><translation>4194304x</translation></message><message><source>Japanese (日本語)</source><translation>日语 (日本語)</translation></message><message><source>American English</source><translation>美式英语</translation></message><message><source>French (français)</source><translation>法语 (français)</translation></message><message><source>German (Deutsch)</source><translation>德语 (Deutsch)</translation></message><message><source>Italian (italiano)</source><translation>意大利语 (italiano)</translation></message><message><source>Spanish (español)</source><translation>西班牙语 (español)</translation></message><message><source>Chinese</source><translation>中文</translation></message><message><source>Korean (한국어)</source><translation>韩语 (한국어)</translation></message><message><source>Dutch (Nederlands)</source><translation>荷兰语 (Nederlands)</translation></message><message><source>Portuguese (português)</source><translation>葡萄牙语 (português)</translation></message><message><source>Russian (Русский)</source><translation>俄语 (Русский)</translation></message><message><source>Taiwanese</source><translation>台湾中文</translation></message><message><source>British English</source><translation>英式英语</translation></message><message><source>Canadian French</source><translation>加拿大法语</translation></message><message><source>Latin American Spanish</source><translation>拉美西班牙语</translation></message><message><source>Simplified Chinese</source><translation>简体中文</translation></message><message><source>Traditional Chinese (正體中文)</source><translation>繁体中文 (正體中文)</translation></message><message><source>Brazilian Portuguese (português do Brasil)</source><translation>巴西-葡萄牙语 (português do Brasil)</translation></message><message><source>Japan</source><translation>日本</translation></message><message><source>USA</source><translation>美国</translation></message><message><source>Europe</source><translation>欧洲</translation></message><message><source>Australia</source><translation>澳大利亚</translation></message><message><source>China</source><translation>中国</translation></message><message><source>Korea</source><translation>韩国</translation></message><message><source>Taiwan</source><translation>中国台湾</translation></message><message><source>Auto (%1)</source><comment>Auto select time zone</comment><translation>自动 (%1)</translation></message><message><source>Default (%1)</source><comment>Default time zone</comment><translation>默认 (%1)</translation></message><message><source>CET</source><translation>欧洲中部时间</translation></message><message><source>CST6CDT</source><translation>古巴标准时间&amp;古巴夏令时</translation></message><message><source>Cuba</source><translation>古巴</translation></message><message><source>EET</source><translation>东欧时间</translation></message><message><source>Egypt</source><translation>埃及</translation></message><message><source>Eire</source><translation>爱尔兰</translation></message><message><source>EST</source><translation>东部标准时间</translation></message><message><source>EST5EDT</source><translation>东部标准时间&amp;东部夏令时</translation></message><message><source>GB</source><translation>英国</translation></message><message><source>GB-Eire</source><translation>英国-爱尔兰时间</translation></message><message><source>GMT</source><translation>格林威治标准时间 (GMT)</translation></message><message><source>GMT+0</source><translation>GMT+0</translation></message><message><source>GMT-0</source><translation>GMT-0</translation></message><message><source>GMT0</source><translation>GMT0</translation></message><message><source>Greenwich</source><translation>格林威治</translation></message><message><source>Hongkong</source><translation>中国香港</translation></message><message><source>HST</source><translation>美国夏威夷时间</translation></message><message><source>Iceland</source><translation>冰岛</translation></message><message><source>Iran</source><translation>伊朗</translation></message><message><source>Israel</source><translation>以色列</translation></message><message><source>Jamaica</source><translation>牙买加</translation></message><message><source>Kwajalein</source><translation>夸贾林环礁</translation></message><message><source>Libya</source><translation>利比亚</translation></message><message><source>MET</source><translation>中欧时间</translation></message><message><source>MST</source><translation>山区标准时间 (北美)</translation></message><message><source>MST7MDT</source><translation>山区标准时间&amp;山区夏令时 (北美)</translation></message><message><source>Navajo</source><translation>纳瓦霍</translation></message><message><source>NZ</source><translation>新西兰时间</translation></message><message><source>NZ-CHAT</source><translation>新西兰-查塔姆群岛</translation></message><message><source>Poland</source><translation>波兰</translation></message><message><source>Portugal</source><translation>葡萄牙</translation></message><message><source>PRC</source><translation>中国标准时间</translation></message><message><source>PST8PDT</source><translation>太平洋标准时间&amp;太平洋夏令时</translation></message><message><source>ROC</source><translation>台湾时间</translation></message><message><source>ROK</source><translation>韩国时间</translation></message><message><source>Singapore</source><translation>新加坡</translation></message><message><source>Turkey</source><translation>土耳其</translation></message><message><source>UCT</source><translation>UCT</translation></message><message><source>Universal</source><translation>世界时间</translation></message><message><source>UTC</source><translation>协调世界时</translation></message><message><source>W-SU</source><translation>欧洲-莫斯科时间</translation></message><message><source>WET</source><translation>西欧时间</translation></message><message><source>Zulu</source><translation>祖鲁</translation></message><message><source>Mono</source><translation>单声道</translation></message><message><source>Stereo</source><translation>立体声</translation></message><message><source>Surround</source><translation>环绕声</translation></message><message><source>4GB DRAM (Default)</source><translation>4GB DRAM (默认)</translation></message><message><source>6GB DRAM (Unsafe)</source><translation>6GB DRAM (不安全)</translation></message><message><source>8GB DRAM (Unsafe)</source><translation>8GB DRAM (不安全)</translation></message><message><source>10GB DRAM (Unsafe)</source><translation>10GB DRAM (不安全)</translation></message><message><source>12GB DRAM (Unsafe)</source><translation>12GB DRAM (不安全)</translation></message><message><source>14GB DRAM (Unsafe)</source><translation>14GB DRAM (不安全)</translation></message><message><source>16GB DRAM (Unsafe)</source><translation>16GB DRAM (不安全)</translation></message><message><source>Docked</source><translation>主机模式</translation></message><message><source>Handheld</source><translation>掌机模式</translation></message><message><source>Always ask (Default)</source><translation>总是询问 (默认)</translation></message><message><source>Only if game specifies not to stop</source><translation>仅当游戏不希望停止时</translation></message><message><source>Never ask</source><translation>从不询问</translation></message><message><source>Off</source><translation>关闭</translation></message></context>
+<context>
+    <name>GRenderWindow</name>
+    <message>
+        <location filename="../../src/citron/bootmanager.cpp" line="1019" />
+        <location filename="../../src/citron/bootmanager.cpp" line="1036" />
+        <source>OpenGL not available!</source>
+        <translation>OpenGL 模式不可用！</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/bootmanager.cpp" line="1020" />
+        <source>OpenGL shared contexts are not supported.</source>
+        <translation>不支持 OpenGL 共享上下文。</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/bootmanager.cpp" line="1037" />
+        <source>citron has not been compiled with OpenGL support.</source>
+        <translation>citron 没有使用 OpenGL 进行编译。</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/bootmanager.cpp" line="1061" />
+        <location filename="../../src/citron/bootmanager.cpp" line="1081" />
+        <source>Error while initializing OpenGL!</source>
+        <translation>初始化 OpenGL 时出错！</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/bootmanager.cpp" line="1062" />
+        <source>Your GPU may not support OpenGL, or you do not have the latest graphics driver.</source>
+        <translation>您的 GPU 可能不支持 OpenGL ，或者您没有安装最新的显卡驱动。</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/bootmanager.cpp" line="1071" />
+        <source>Error while initializing OpenGL 4.6!</source>
+        <translation>初始化 OpenGL 4.6 时出错！</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/bootmanager.cpp" line="1072" />
+        <source>Your GPU may not support OpenGL 4.6, or you do not have the latest graphics driver.&lt;br&gt;&lt;br&gt;GL Renderer:&lt;br&gt;%1</source>
+        <translation>您的 GPU 可能不支持 OpenGL 4.6 ，或者您没有安装最新的显卡驱动。&lt;br&gt;&lt;br&gt;GL 渲染器：&lt;br&gt;%1</translation>
+    </message>
+    <message>
+        <location filename="../../src/citron/bootmanager.cpp" line="1082" />
+        <source>Your GPU may not support one or more required OpenGL extensions. Please ensure you have the latest graphics driver.&lt;br&gt;&lt;br&gt;GL Renderer:&lt;br&gt;%1&lt;br&gt;&lt;br&gt;Unsupported extensions:&lt;br&gt;%2</source>
+        <translation>您的 GPU 可能不支持某些必需的 OpenGL 扩展。请确保您已经安装最新的显卡驱动。&lt;br&gt;&lt;br&gt;GL 渲染器：&lt;br&gt;%1&lt;br&gt;&lt;br&gt;不支持的扩展：&lt;br&gt;%2</translation>
+    </message>
+</context>
+<context>
+    <name>NetworkMessage::ErrorManager</name>
+    <message>
+        <location filename="../../src/citron/multiplayer/message.cpp" line="63" />
+        <source>Error</source>
+        <translation>错误</translation>
+    </message>
+</context>
+</TS>
