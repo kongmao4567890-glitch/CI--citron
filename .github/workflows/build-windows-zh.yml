@@ -146,7 +146,9 @@ jobs:
           mkdir -p "${BIN_DIR}/user"
           echo "This folder marks a portable installation. Citron stores config and save data here." > "${BIN_DIR}/user/README.txt"
           cd "$BIN_DIR"
-          zip -r "${GITHUB_WORKSPACE}/dist/Citron-windows-${{ steps.version.outputs.VERSION }}-x64-clangtron-汉化版.zip" .
+          # ASCII only: GitHub strips non-ASCII from release asset names, which turned
+          # "...-clangtron-汉化版.zip" into "...-clangtron-.zip" on the published release.
+          zip -r "${GITHUB_WORKSPACE}/dist/Citron-windows-${{ steps.version.outputs.VERSION }}-x64-clangtron-zh_CN.zip" .
 
       - name: Upload Build Artifact
         uses: actions/upload-artifact@v4
