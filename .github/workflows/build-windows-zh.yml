@@ -1,15 +1,35 @@
 name: Build Citron 汉化版 (Windows)
+
 concurrency:
   group: build-windows-zh-${{ github.ref }}
   cancel-in-progress: true
+
 on:
   workflow_dispatch: {}
+  push:
+    branches:
+      - 'claude/**'
+    paths:
+      - '.github/workflows/build-windows-zh.yml'
+      - 'patches/**'
+      - 'tools/**'
+      - 'translations/**'
+      - 'patch-translation.sh'
+  schedule:
+    # 12:30 AM UTC, staggered off the upstream nightly so the two do not fight for runners.
+    - cron: '30 0 * * *'
+
+permissions:
+  contents: write
 
 jobs:
   build-chinese:
-    name: "Citron 汉化版构建 (Windows Clangtron - x64)"
+    name: "汉化版构建 (Windows Clangtron - x64)"
     runs-on: ubuntu-latest
     timeout-minutes: 300
+    outputs:
+      version: ${{ steps.version.outputs.VERSION }}
+      version_full: ${{ steps.version.outputs.VERSION_FULL }}
     env:
       CPM_SOURCE_CACHE: /home/runner/.cache/cpm
     steps:
@@ -17,10 +37,31 @@ jobs:
         with:
           persist-credentials: false
 
+      - name: Install Qt Linguist tools
+        # lrelease compiles translations/zh_CN.ts into the .qm that gets embedded, and lupdate lets
+        # the coverage gate re-scan the freshly cloned upstream source. Both ship in this package,
+        # so a build without it could only check a possibly stale catalogue.
+        run: |
+          for attempt in 1 2 3; do
+            sudo apt-get update -qq || true
+            if sudo apt-get install -y --no-install-recommends qt6-l10n-tools; then
+              break
+            fi
+            echo "apt attempt $attempt failed; retrying in $((attempt * 10))s"
+            sleep $((attempt * 10))
+          done
+          for tool in lrelease lupdate; do
+            if [ ! -x "/usr/lib/qt6/bin/$tool" ]; then
+              echo "::error::/usr/lib/qt6/bin/$tool missing after installing qt6-l10n-tools"
+              exit 1
+            fi
+          done
+          /usr/lib/qt6/bin/lrelease -version
+
       - name: Clone Citron Source
         run: |
           ATTEMPT=0
-          MAX_ATTEMPTS=999
+          MAX_ATTEMPTS=20
           while true; do
             ATTEMPT=$((ATTEMPT + 1))
             echo "Attempt $ATTEMPT of $MAX_ATTEMPTS: Cloning Citron..."
@@ -30,17 +71,28 @@ jobs:
               break
             fi
             if [ $ATTEMPT -ge $MAX_ATTEMPTS ]; then
-              echo "Failed after $MAX_ATTEMPTS attempts."
+              echo "::error::Failed to clone Citron after $MAX_ATTEMPTS attempts."
               exit 1
             fi
             echo "Clone failed. Retrying in 15 seconds..."
             sleep 15
           done
 
-      - name: Apply Chinese Translation Patch
+      - name: Get Version
+        id: version
+        working-directory: ./citron
         run: |
-          chmod +x patch-translation.sh
-          ./patch-translation.sh ./citron
+          git fetch --tags || true
+          echo "VERSION=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+          echo "VERSION_FULL=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
+
+      - name: Apply Chinese patch (translation + cheat manager)
+        run: python3 tools/patch_citron.py ./citron
+
+      - name: Verify translation coverage
+        # A build that quietly loses a translated string is the failure mode this repo exists to
+        # prevent, so an incomplete catalogue fails the build instead of shipping.
+        run: python3 tools/verify_translation.py ./citron --strict-refresh
 
       - name: Cache CPM and Toolchain
         uses: actions/cache@v4
@@ -49,14 +101,6 @@ jobs:
           key: clangtron-zh-cache-${{ runner.os }}-${{ hashFiles('citron/CMakeModules/dependencies.cmake', 'citron/build-clangtron-windows.sh') }}
           restore-keys: |
             clangtron-zh-cache-${{ runner.os }}-
-
-      - name: Get Version
-        id: version
-        working-directory: ./citron
-        run: |
-          git fetch --tags
-          VERSION=$(git rev-parse --short HEAD)
-          echo "VERSION=${VERSION}" >> $GITHUB_OUTPUT
 
       - name: Skip BOLT build
         run: |
@@ -78,6 +122,18 @@ jobs:
           export CITRON_BUILD_TYPE=Release
           ./build-clangtron-windows.sh use --pgo none --lto full
 
+      - name: Confirm the translation was compiled into the binary
+        run: |
+          # AUTORCC turns translations_zh.qrc into a qrc_*.cpp under the autogen tree. Its absence
+          # means the resource never made it into citron.exe and the build would start in English.
+          if ! find ./citron/build -name 'qrc_translations_zh.cpp' | grep -q .; then
+            echo "::error::translations_zh.qrc was not compiled — the build would not be Chinese"
+            find ./citron/build -name 'qrc_*.cpp' | head -20
+            exit 1
+          fi
+          echo "Chinese resource embedded:"
+          find ./citron/build -name 'qrc_translations_zh.cpp'
+
       - name: Package Windows Build
         run: |
           mkdir -p dist
@@ -90,7 +146,7 @@ jobs:
           mkdir -p "${BIN_DIR}/user"
           echo "This folder marks a portable installation. Citron stores config and save data here." > "${BIN_DIR}/user/README.txt"
           cd "$BIN_DIR"
-          zip -r "${GITHUB_WORKSPACE}/dist/Citron-windows-nightly-${{ steps.version.outputs.VERSION }}-x64-clangtron-汉化版.zip" .
+          zip -r "${GITHUB_WORKSPACE}/dist/Citron-windows-${{ steps.version.outputs.VERSION }}-x64-clangtron-汉化版.zip" .
 
       - name: Upload Build Artifact
         uses: actions/upload-artifact@v4
@@ -98,3 +154,50 @@ jobs:
           name: Citron-Windows-汉化版
           path: "dist/*.zip"
           retention-days: 30
+
+  release:
+    name: "发布 (Release)"
+    needs: [build-chinese]
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: Citron-Windows-汉化版
+          path: ./release-artifacts
+      - name: Set Build Date
+        run: echo "BUILD_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+      - name: Delete Previous Release
+        run: gh release delete "nightly-windows-zh" --repo "${{ github.repository }}" --cleanup-tag -y || true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Release Artifacts
+        uses: softprops/action-gh-release@v2
+        with:
+          name: "Citron 汉化版 (Windows: ${{ needs.build-chinese.outputs.version }})"
+          tag_name: "nightly-windows-zh"
+          target_commitish: ${{ github.sha }}
+          prerelease: false
+          files: release-artifacts/*.zip
+          body: |
+            **上游提交 (Citron Upstream Commit):** [`${{ needs.build-chinese.outputs.version }}`](https://github.com/citron-neo/emulator/commit/${{ needs.build-chinese.outputs.version_full }})
+
+            ### 本版本包含 / What this build adds
+            - **完整简体中文界面**：模拟器界面全部汉化，覆盖率 100%（构建时强制校验，漏翻即构建失败）。
+            - **默认中文**：首次启动即为简体中文，无需手动切换；仍可在「设置 → 界面」中改回其他语言。
+            - **金手指管理器**：`工具 → 金手指管理器`，可逐条勾选要启用的金手指，支持搜索、全选/全不选/反选、按来源分组，游戏运行中即时生效。
+            - **金手指总开关**：`设置 → 系统` 中的「启用金手指」，一键暂停全部金手指且不丢失已勾选的项目。
+
+            ### 构建信息 / Build details
+            - 平台 Platform: Windows x64
+            - 工具链 Toolchain: Clangtron (Clang LTO)
+            - 构建类型 Build type: Release
+            - 日期 Date: ${{ env.BUILD_DATE }}
+
+            > 便携模式：解压后目录内的 `user/` 文件夹用于存放配置与存档。
