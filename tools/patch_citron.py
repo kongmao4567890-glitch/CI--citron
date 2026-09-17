@@ -310,6 +310,153 @@ void GMainWindow::OnConfigurePerGame() {""",
             what="main.cpp OnOpenCheatManager implementation",
         )
 
+
+    # -- 5. game list scan crash ------------------------------------------------------------
+    def patch_scan_crash(self) -> None:
+        """Stop a single bad file from taking the whole emulator down during a deep scan.
+
+        GameListWorker is a QRunnable, so an exception escaping run() is std::terminate(): the
+        process disappears with no dialog and no log line. Nothing in the scan path catches
+        anything, and a deep scan feeds every file under the game folder - including whatever
+        else the user keeps there - through the NCA/NSP/XCI parsers, which size their buffers
+        from header fields. A shallow scan only ever sees the well-formed containers sitting at
+        the top level, which is why the crash only shows up with "Scan Subfolders" on.
+        """
+        # A logging helper that is safe to call from a catch block.
+        self.replace(
+            "src/citron/game_list_worker.cpp",
+            "bool IsExtractedNCAMain(const std::string& file_name) {",
+            """/// Path of a directory entry for log messages. Safe to call while handling an exception:
+/// the conversion itself can throw, and throwing out of a handler would abort the process.
+std::string PathForLog(const std::filesystem::directory_entry& entry) noexcept {
+    try {
+        return Common::FS::PathToUTF8String(entry.path());
+    } catch (...) {
+        return "<unprintable path>";
+    }
+}
+
+bool IsExtractedNCAMain(const std::string& file_name) {""",
+            marker="std::string PathForLog(",
+            what="PathForLog helper",
+        )
+
+        # Guard every file the scan touches.
+        self.replace(
+            "src/citron/game_list_worker.cpp",
+            """    if (deep_scan) {
+        Common::FS::IterateDirEntriesRecursively(dir_path, callback,
+                                                 Common::FS::DirEntryFilter::All);
+    } else {
+        Common::FS::IterateDirEntries(dir_path, callback, Common::FS::DirEntryFilter::File);
+    }""",
+            """    // One unreadable or malformed file must not end the scan, let alone the process.
+    const auto guarded_callback = [&callback, &processed_files](
+                                      const std::filesystem::directory_entry& dir_entry) -> bool {
+        try {
+            return callback(dir_entry);
+        } catch (const std::exception& e) {
+            LOG_ERROR(Frontend, "Skipping '{}' while scanning: {}", PathForLog(dir_entry),
+                      e.what());
+        } catch (...) {
+            LOG_ERROR(Frontend, "Skipping '{}' while scanning: unknown exception",
+                      PathForLog(dir_entry));
+        }
+        ++processed_files;
+        return true;
+    };
+
+    if (deep_scan) {
+        Common::FS::IterateDirEntriesRecursively(dir_path, guarded_callback,
+                                                 Common::FS::DirEntryFilter::All);
+    } else {
+        Common::FS::IterateDirEntries(dir_path, guarded_callback,
+                                      Common::FS::DirEntryFilter::File);
+    }""",
+            marker="guarded_callback",
+            what="per-file guard in ScanFileSystem",
+        )
+
+        # Same for the counting pass, which walks the identical tree.
+        self.replace(
+            "src/citron/game_list_worker.cpp",
+            """        if (game_dir.deep_scan) {
+            Common::FS::IterateDirEntriesRecursively(game_dir.path, count_callback,
+                                                     Common::FS::DirEntryFilter::All);
+        } else {
+            Common::FS::IterateDirEntries(game_dir.path, count_callback,
+                                          Common::FS::DirEntryFilter::File);
+        }""",
+            """        const auto guarded_count_callback =
+            [&count_callback](const std::filesystem::directory_entry& dir_entry) -> bool {
+            try {
+                return count_callback(dir_entry);
+            } catch (...) {
+                // Only used for the progress bar denominator; a miscount is not worth a crash.
+                LOG_ERROR(Frontend, "Skipping '{}' while counting files", PathForLog(dir_entry));
+            }
+            return true;
+        };
+
+        if (game_dir.deep_scan) {
+            Common::FS::IterateDirEntriesRecursively(game_dir.path, guarded_count_callback,
+                                                     Common::FS::DirEntryFilter::All);
+        } else {
+            Common::FS::IterateDirEntries(game_dir.path, guarded_count_callback,
+                                          Common::FS::DirEntryFilter::File);
+        }""",
+            marker="guarded_count_callback",
+            what="per-file guard in the counting pass",
+        )
+
+        # Last line of defence: nothing may escape QRunnable::run().
+        self.replace(
+            "src/citron/game_list_worker.cpp",
+            "void GameListWorker::run() {",
+            """void GameListWorker::run() {
+    // QRunnable::run() is a noexcept boundary in practice: an exception leaving it calls
+    // std::terminate() and the emulator exits without a word. Whatever goes wrong in the scan,
+    // the user should be left with a running emulator and a log line.
+    try {
+        RunScan();
+    } catch (const std::exception& e) {
+        LOG_ERROR(Frontend, "Game list scan aborted: {}", e.what());
+        FinishAbortedScan();
+    } catch (...) {
+        LOG_ERROR(Frontend, "Game list scan aborted by an unknown exception");
+        FinishAbortedScan();
+    }
+}
+
+void GameListWorker::FinishAbortedScan() {
+    // Whatever was found before the failure is still worth showing, and the UI keeps its loading
+    // overlay up until Finished arrives. ~GameListWorker() blocks on the event, so it has to be
+    // set on every path out of run().
+    emit Finished(watch_list);
+    processing_completed.Set();
+}
+
+void GameListWorker::RunScan() {""",
+            marker="void GameListWorker::RunScan()",
+            what="no-throw boundary around run()",
+        )
+
+        self.replace(
+            "src/citron/game_list_worker.h",
+            """    void AddTitlesToGameList(const QString& parent_path,
+                             const std::map<u64, std::pair<int, int>>& online_stats);""",
+            """    /// Body of run(). Split out so run() itself can be a no-throw boundary.
+    void RunScan();
+
+    /// Closes out a scan that threw, so the UI is not left waiting on a worker that gave up.
+    void FinishAbortedScan();
+
+    void AddTitlesToGameList(const QString& parent_path,
+                             const std::map<u64, std::pair<int, int>>& online_stats);""",
+            marker="void RunScan();",
+            what="RunScan declaration",
+        )
+
     # -- verification ----------------------------------------------------------------------
     def verify(self) -> None:
         checks = [
@@ -328,6 +475,10 @@ void GMainWindow::OnConfigurePerGame() {""",
             ("src/common/settings.h", 'cheats_enabled{linkage, true'),
             ("src/core/file_sys/patch_manager.cpp", "Master switch off: keep the entries"),
             ("src/citron/configuration/shared_translation.cpp", "INSERT(Settings, cheats_enabled"),
+            ("src/citron/game_list_worker.cpp", "guarded_callback"),
+            ("src/citron/game_list_worker.cpp", "void GameListWorker::RunScan()"),
+            ("src/citron/game_list_worker.h", "void RunScan();"),
+            ("src/citron/game_list_worker.cpp", "FinishAbortedScan"),
             ("dist/languages/zh_CN.ts", "<TS "),
         ]
         failures = []
@@ -360,14 +511,16 @@ def main() -> int:
     print(f"=== Citron Chinese build patch ===\nsource: {citron}")
     patcher = Patcher(citron)
     try:
-        print("\n[1/4] translations")
+        print("\n[1/5] translations")
         patcher.patch_translations()
-        print("\n[2/4] default language")
+        print("\n[2/5] default language")
         patcher.patch_default_language()
-        print("\n[3/4] cheat engine master switch")
+        print("\n[3/5] cheat engine master switch")
         patcher.patch_cheat_setting()
-        print("\n[4/4] cheat manager dialog")
+        print("\n[4/5] cheat manager dialog")
         patcher.patch_cheat_manager()
+        print("\n[5/5] game list scan crash fix")
+        patcher.patch_scan_crash()
         print("\n[verify]")
         patcher.verify()
     except PatchError as error:
