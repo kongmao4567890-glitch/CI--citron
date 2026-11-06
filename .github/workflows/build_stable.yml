@@ -528,7 +528,7 @@ jobs:
           OPENAL_DIR="$(brew --prefix openal-soft)"
           SDL2_DIR="$(brew --prefix sdl2)"
           cmake -B build -S . -G "Ninja" \
-            -DCMAKE_OSX_DEPLOYMENT_TARGET=11.0 \
+            -DCMAKE_OSX_DEPLOYMENT_TARGET=13.3 \
             -DCMAKE_BUILD_TYPE=Release \
             -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
             -DCMAKE_PREFIX_PATH="$OPENAL_DIR;$SDL2_DIR" \
