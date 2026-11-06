@@ -1569,7 +1569,7 @@ When a guest attempts to open the controller applet, it is immediately closed.</
     </message>
     <message>
         <source>Null</source>
-        <translation>无</translation>
+        <translation type="vanished">无</translation>
     </message>
     <message>
         <source>Low</source>
@@ -2339,6 +2339,10 @@ Pick individual cheats from Tools &gt; Cheat Manager.</source>
         <source>Uses dynamic vertex input when EDS3 is enabled. Disable this to troubleshoot rendering issues on affected GPU drivers.</source>
         <translation>启用 EDS3 时使用动态顶点输入。如果受影响的显卡驱动出现渲染问题，可关闭此项以排查。</translation>
     </message>
+    <message>
+        <source>Vulkan (headless)</source>
+        <translation>Vulkan（无头模式）</translation>
+    </message>
 </context>
 <context>
     <name>ConfigureApplets</name>
@@ -2776,7 +2780,7 @@ Pick individual cheats from Tools &gt; Cheat Manager.</source>
     </message>
     <message>
         <source>Enable Debug Asserts</source>
-        <translation>启用调试断言</translation>
+        <translation type="vanished">启用调试断言</translation>
     </message>
     <message>
         <source>Debugging</source>
@@ -7049,7 +7053,7 @@ Please go to Configure -&gt; System -&gt; Network and make a selection.</source>
     </message>
     <message>
         <source>Null</source>
-        <translation>无</translation>
+        <translation type="vanished">无</translation>
     </message>
     <message>
         <source>Setup Wizard</source>
@@ -8289,6 +8293,10 @@ Cheats for a game that is not running can be picked in its right-click menu, und
 
 未运行的游戏可在其右键菜单中通过「属性 &gt; 金手指」选择金手指。</translation>
     </message>
+    <message>
+        <source>Vulkan (headless)</source>
+        <translation>Vulkan（无头模式）</translation>
+    </message>
 </context>
 <context>
     <name>GRenderWindow</name>
@@ -9099,6 +9107,82 @@ If you do not have one, this feature will not work. Would you like to proceed?</
     <message>
         <source>Navigate to GameDB entry</source>
         <translation type="vanished">查看兼容性报告</translation>
+    </message>
+    <message>
+        <source>Run with AOT</source>
+        <translation>使用 AOT 运行</translation>
+    </message>
+    <message>
+        <source>Starting ScarletNX for %1</source>
+        <translation>正在为 %1 启动 ScarletNX</translation>
+    </message>
+    <message>
+        <source>Stop</source>
+        <translation>停止</translation>
+    </message>
+    <message>
+        <source>Recompiling %1
+Block %2 of %3</source>
+        <translation>正在重编译 %1
+第 %2 / %3 块</translation>
+    </message>
+    <message>
+        <source>Unpacking %1</source>
+        <translation>正在解包 %1</translation>
+    </message>
+    <message>
+        <source>Extracting %1</source>
+        <translation>正在提取 %1</translation>
+    </message>
+    <message>
+        <source>Building hactool</source>
+        <translation>正在构建 hactool</translation>
+    </message>
+    <message>
+        <source>Recompiling %1
+Finding the game&apos;s code</source>
+        <translation>正在重编译 %1
+正在查找游戏代码</translation>
+    </message>
+    <message>
+        <source>Starting %1</source>
+        <translation>正在启动 %1</translation>
+    </message>
+    <message>
+        <source> (exit status %1)</source>
+        <translation>（退出代码 %1）</translation>
+    </message>
+    <message>
+        <source>ScarletNX stopped before %1 started%2.
+
+%3
+
+Its output is in %4 and %5.</source>
+        <translation>ScarletNX 在 %1 启动前就已停止%2。
+
+%3
+
+其输出位于 %4 和 %5。</translation>
+    </message>
+    <message>
+        <source>Select scarletnx.exe</source>
+        <translation>选择 scarletnx.exe</translation>
+    </message>
+    <message>
+        <source>ScarletNX (scarletnx.exe)</source>
+        <translation>ScarletNX (scarletnx.exe)</translation>
+    </message>
+    <message>
+        <source>Could not copy the key files to %1: %2</source>
+        <translation>无法将密钥文件复制到 %1：%2</translation>
+    </message>
+    <message>
+        <source>Could not start %1.</source>
+        <translation>无法启动 %1。</translation>
+    </message>
+    <message>
+        <source>Run with AOT (experimental)</source>
+        <translation>使用 AOT 运行（实验性）</translation>
     </message>
 </context>
 <context>
