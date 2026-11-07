@@ -190,7 +190,10 @@ jobs:
         with:
           name: "Citron 汉化版 (Windows: ${{ steps.version.outputs.VERSION }})"
           tag_name: "nightly-windows-zh"
-          target_commitish: ${{ github.sha }}
+          # Tag the default branch, not this commit. GITHUB_TOKEN cannot hold the `workflows`
+          # permission, and GitHub refuses it a new ref on a commit that changes workflow files —
+          # which made the release step 403 right after the old release had been deleted.
+          target_commitish: ${{ github.event.repository.default_branch }}
           prerelease: false
           files: dist/*.zip
           body: |
@@ -200,7 +203,9 @@ jobs:
             - **完整简体中文界面**：模拟器界面全部汉化，覆盖率 100%（构建时强制校验，漏翻即构建失败）。
             - **默认中文**：首次启动即为简体中文，无需手动切换；仍可在「设置 → 界面」中改回其他语言。
             - **金手指管理器**：`工具 → 金手指管理器`，可逐条勾选要启用的金手指，支持搜索、全选/全不选/反选、按来源分组，游戏运行中即时生效。
+            - **与「属性 → 金手指」页互通**：两处的勾选是同一份设置，在任一处开关都会同步到另一处。
             - **金手指总开关**：`设置 → 系统` 中的「启用金手指」，一键暂停全部金手指且不丢失已勾选的项目。
+            - **扫描子目录不再闪退**：单个损坏文件会被跳过并记入日志，不会让模拟器直接关闭。
 
             ### 构建信息 / Build details
             - 平台 Platform: Windows x64
