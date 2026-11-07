@@ -166,44 +166,38 @@ jobs:
           zip -r "${GITHUB_WORKSPACE}/dist/Citron-windows-${{ steps.version.outputs.VERSION }}-x64-clangtron-zh_CN.zip" .
 
       - name: Upload Build Artifact
+        # Optional extra copy. The account's Actions artifact quota is shared with the daily nightly
+        # workflows and fills up; the release below does not depend on this step.
+        continue-on-error: true
         uses: actions/upload-artifact@v4
         with:
           name: Citron-Windows-汉化版
           path: "dist/*.zip"
-          retention-days: 30
+          retention-days: 3
 
-  release:
-    name: "发布 (Release)"
-    needs: [build-chinese]
-    if: github.event_name != 'pull_request'
-    runs-on: ubuntu-24.04
-    permissions:
-      contents: write
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          persist-credentials: false
-      - name: Download artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: Citron-Windows-汉化版
-          path: ./release-artifacts
       - name: Set Build Date
+        if: github.event_name != 'pull_request'
         run: echo "BUILD_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+
+      # Published straight from this job rather than through an artifact hand-off to a second job:
+      # release assets do not count against the artifact storage quota that once blocked a
+      # finished, verified build from ever reaching the release.
       - name: Delete Previous Release
+        if: github.event_name != 'pull_request'
         run: gh release delete "nightly-windows-zh" --repo "${{ github.repository }}" --cleanup-tag -y || true
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Release Artifacts
+        if: github.event_name != 'pull_request'
         uses: softprops/action-gh-release@v2
         with:
-          name: "Citron 汉化版 (Windows: ${{ needs.build-chinese.outputs.version }})"
+          name: "Citron 汉化版 (Windows: ${{ steps.version.outputs.VERSION }})"
           tag_name: "nightly-windows-zh"
           target_commitish: ${{ github.sha }}
           prerelease: false
-          files: release-artifacts/*.zip
+          files: dist/*.zip
           body: |
-            **上游提交 (Citron Upstream Commit):** [`${{ needs.build-chinese.outputs.version }}`](https://github.com/citron-neo/emulator/commit/${{ needs.build-chinese.outputs.version_full }})
+            **上游提交 (Citron Upstream Commit):** [`${{ steps.version.outputs.VERSION }}`](https://github.com/citron-neo/emulator/commit/${{ steps.version.outputs.VERSION_FULL }})
 
             ### 本版本包含 / What this build adds
             - **完整简体中文界面**：模拟器界面全部汉化，覆盖率 100%（构建时强制校验，漏翻即构建失败）。
