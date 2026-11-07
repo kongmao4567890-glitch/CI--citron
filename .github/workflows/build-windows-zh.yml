@@ -15,9 +15,6 @@ on:
       - 'tools/**'
       - 'translations/**'
       - 'patch-translation.sh'
-  schedule:
-    # 12:30 AM UTC, staggered off the upstream nightly so the two do not fight for runners.
-    - cron: '30 0 * * *'
 
 permissions:
   contents: write
