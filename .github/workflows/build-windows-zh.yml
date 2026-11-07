@@ -25,7 +25,7 @@ permissions:
 jobs:
   build-chinese:
     name: "汉化版构建 (Windows Clangtron - x64)"
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 300
     outputs:
       version: ${{ steps.version.outputs.VERSION }}
@@ -37,19 +37,34 @@ jobs:
         with:
           persist-credentials: false
 
+      - name: Cache Qt Linguist packages
+        # qt6-l10n-tools drags in ~40 MB of LLVM (lupdate parses C++ with clang). A slow Ubuntu
+        # mirror once took 7 minutes over a single one of those packages; serving the .debs from
+        # the Actions cache takes the mirror out of the build's critical path.
+        uses: actions/cache@v4
+        with:
+          path: ~/apt-l10n
+          key: apt-l10n-ubuntu-24.04-v1
+
       - name: Install Qt Linguist tools
         # lrelease compiles translations/zh_CN.ts into the .qm that gets embedded, and lupdate lets
-        # the coverage gate re-scan the freshly cloned upstream source. Both ship in this package,
-        # so a build without it could only check a possibly stale catalogue.
+        # the coverage gate re-scan the freshly cloned upstream source.
+        timeout-minutes: 20
+        env:
+          DEBIAN_FRONTEND: noninteractive
         run: |
+          mkdir -p ~/apt-l10n/partial
           for attempt in 1 2 3; do
-            sudo apt-get update -qq || true
-            if sudo apt-get install -y --no-install-recommends qt6-l10n-tools; then
+            # The package lists are only needed when the cache cannot satisfy the install.
+            if sudo apt-get install -y --no-install-recommends \
+                 -o Dir::Cache::Archives="$HOME/apt-l10n" qt6-l10n-tools; then
               break
             fi
+            sudo apt-get update -qq || true
             echo "apt attempt $attempt failed; retrying in $((attempt * 10))s"
             sleep $((attempt * 10))
           done
+          sudo chown -R "$USER" ~/apt-l10n
           for tool in lrelease lupdate; do
             if [ ! -x "/usr/lib/qt6/bin/$tool" ]; then
               echo "::error::/usr/lib/qt6/bin/$tool missing after installing qt6-l10n-tools"
@@ -161,7 +176,7 @@ jobs:
     name: "发布 (Release)"
     needs: [build-chinese]
     if: github.event_name != 'pull_request'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     permissions:
       contents: write
     steps:
