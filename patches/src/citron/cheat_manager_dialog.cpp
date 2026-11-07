@@ -408,20 +408,8 @@ void CheatManagerDialog::SetCheatEnabled(std::size_t index, bool enabled) {
 
     auto& cheat = cheats[index];
     cheat.enabled = enabled;
-
-    const auto cheat_key = FileSys::GetCheatConfigKey(cheat.source, cheat.name);
-    auto& disabled_cheats = Settings::values.disabled_cheats[cheat.build_id];
-    if (enabled) {
-        disabled_cheats.erase(cheat_key);
-        // Configs written before source-specific keys existed stored the bare name; drop that
-        // too so the cheat does not stay disabled through the legacy path.
-        disabled_cheats.erase(cheat.name);
-        if (disabled_cheats.empty()) {
-            Settings::values.disabled_cheats.erase(cheat.build_id);
-        }
-    } else {
-        disabled_cheats.insert(cheat_key);
-    }
+    // Shared with the per-game Cheats tab, so a change here shows up there and vice versa.
+    FileSys::SetCheatEnabled(cheat.build_id, cheat.source, cheat.name, enabled);
 }
 
 void CheatManagerDialog::ReloadCheatEngine() const {

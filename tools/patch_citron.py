@@ -47,14 +47,15 @@ class Patcher:
     def _write(self, rel: str, text: str) -> None:
         (self.citron / rel).write_text(text, encoding="utf-8")
 
-    def replace(self, rel: str, anchor: str, replacement: str, *, marker: str, what: str) -> None:
+    def replace(self, rel: str, anchor: str, replacement: str, *, marker: str, what: str,
+                invert_marker: bool = False) -> None:
         """Replace `anchor` with `replacement` in `rel`, exactly once.
 
         `marker` is a string that only exists after the patch; finding it means the tree was
         already patched and the edit is skipped instead of applied twice.
         """
         text = self._read(rel)
-        if marker in text:
+        if (marker not in text) if invert_marker else (marker in text):
             self.skipped.append(f"{what} (already patched)")
             return
         occurrences = text.count(anchor)
@@ -457,6 +458,253 @@ void GameListWorker::RunScan() {""",
             what="RunScan declaration",
         )
 
+    # -- 6. one cheat selection shared by every UI -------------------------------------------
+    def patch_cheat_unify(self) -> None:
+        """Make the cheat manager and the per-game Cheats tab read and write one selection.
+
+        The config can hold a disabled cheat under the full 64-char build ID (the per-game tab)
+        or the 16-char one cheat files are named by (the cheat manager, Android), and as a bare
+        name (per-game tab) or a source-qualified key (everything else). ApplyDisabledCheats
+        consulted only the first matching build-ID entry, so mixing the two UIs left one of them
+        ignored, and neither UI showed what the other had switched off.
+        """
+        self.replace(
+            "src/core/file_sys/patch_manager.h",
+            "[[nodiscard]] std::string GetCheatConfigKey(std::string_view source, std::string_view name);",
+            """[[nodiscard]] std::string GetCheatConfigKey(std::string_view source, std::string_view name);
+
+// A cheat's on/off state, read across every form the config may store it in: either length of
+// build ID, bare name or source-qualified key. An empty `source` means "this name from any
+// source", which is what the per-game Cheats tab works with.
+[[nodiscard]] bool IsCheatDisabled(std::string_view build_id, std::string_view source,
+                                   std::string_view name);
+void SetCheatEnabled(std::string_view build_id, std::string_view source, std::string_view name,
+                     bool enabled);""",
+            marker="IsCheatDisabled(std::string_view build_id",
+            what="shared cheat selection API (header)",
+        )
+
+        self.replace(
+            "src/core/file_sys/patch_manager.cpp",
+            """std::string GetCheatConfigKey(std::string_view source, std::string_view name) {
+    return fmt::format("{}:{}{}", source.size(), source, name);
+}""",
+            """std::string GetCheatConfigKey(std::string_view source, std::string_view name) {
+    return fmt::format("{}:{}{}", source.size(), source, name);
+}
+
+namespace {
+
+std::string CanonicalCheatBuildId(std::string_view build_id) {
+    return NormalizeCheatBuildId(std::string{build_id.substr(0, CHEAT_BUILD_ID_LENGTH)});
+}
+
+/// Splits a GetCheatConfigKey() key into (source, name); nullopt for a bare name.
+std::optional<std::pair<std::string_view, std::string_view>> SplitCheatConfigKey(
+    std::string_view key) {
+    const auto colon = key.find(':');
+    if (colon == std::string_view::npos || colon == 0) {
+        return std::nullopt;
+    }
+    std::size_t length = 0;
+    for (const char digit : key.substr(0, colon)) {
+        if (digit < '0' || digit > '9') {
+            return std::nullopt;
+        }
+        length = length * 10 + static_cast<std::size_t>(digit - '0');
+    }
+    const auto rest = key.substr(colon + 1);
+    if (length > rest.size()) {
+        return std::nullopt;
+    }
+    return std::pair{rest.substr(0, length), rest.substr(length)};
+}
+
+bool NamesCheat(const std::string& entry, std::string_view source, std::string_view name) {
+    if (entry == name) {
+        return true;
+    }
+    const auto split = SplitCheatConfigKey(entry);
+    return split && split->second == name && (source.empty() || split->first == source);
+}
+
+} // Anonymous namespace
+
+bool IsCheatDisabled(std::string_view build_id, std::string_view source, std::string_view name) {
+    const auto canonical = CanonicalCheatBuildId(build_id);
+    for (const auto& [key, disabled] : Settings::values.disabled_cheats) {
+        if (CanonicalCheatBuildId(key) != canonical) {
+            continue;
+        }
+        for (const auto& entry : disabled) {
+            if (NamesCheat(entry, source, name)) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+void SetCheatEnabled(std::string_view build_id, std::string_view source, std::string_view name,
+                     bool enabled) {
+    const auto canonical = CanonicalCheatBuildId(build_id);
+    if (!enabled) {
+        Settings::values.disabled_cheats[canonical].insert(
+            source.empty() ? std::string{name} : GetCheatConfigKey(source, name));
+        return;
+    }
+
+    // Clear every record that switches this cheat off, whichever UI wrote it.
+    auto& all = Settings::values.disabled_cheats;
+    for (auto it = all.begin(); it != all.end();) {
+        if (CanonicalCheatBuildId(it->first) == canonical) {
+            std::erase_if(it->second, [source, name](const std::string& entry) {
+                return NamesCheat(entry, source, name);
+            });
+            if (it->second.empty()) {
+                it = all.erase(it);
+                continue;
+            }
+        }
+        ++it;
+    }
+}""",
+            marker="bool IsCheatDisabled(std::string_view build_id, std::string_view source, std::string_view name) {",
+            what="shared cheat selection API (implementation)",
+        )
+
+        self.replace(
+            "src/core/file_sys/patch_manager.cpp",
+            """    const auto normalized_build_id = NormalizeCheatBuildId(build_id);
+    auto disabled_it = Settings::values.disabled_cheats.find(normalized_build_id);
+    if (disabled_it == Settings::values.disabled_cheats.end()) {
+        disabled_it = std::find_if(Settings::values.disabled_cheats.begin(),
+                                   Settings::values.disabled_cheats.end(),
+                                   [&normalized_build_id](const auto& entry) {
+                                       // The config stores the full 0x20-byte build ID, but cheat
+                                       // files are keyed by its first 8 bytes.
+                                       return NormalizeCheatBuildId(entry.first.substr(
+                                                  0, CHEAT_BUILD_ID_LENGTH)) ==
+                                              normalized_build_id;
+                                   });
+    }
+
+    for (auto& cheat : cheats) {
+        const auto cheat_name = GetCheatName(cheat);
+        if (mod_disabled ||
+            (disabled_it != Settings::values.disabled_cheats.end() &&
+             (disabled_it->second.contains(GetCheatConfigKey(source, cheat_name)) ||
+              // Keep configs written before source-specific cheat keys working.
+              disabled_it->second.contains(cheat_name)))) {
+            cheat.enabled = false;
+        }
+    }""",
+            """    for (auto& cheat : cheats) {
+        if (mod_disabled || IsCheatDisabled(build_id, source, GetCheatName(cheat))) {
+            cheat.enabled = false;
+        }
+    }""",
+            marker="IsCheatDisabled(build_id, source, GetCheatName(cheat))",
+            what="engine reads the shared selection",
+        )
+
+        tab = "src/citron/configuration/configure_per_game_cheats.cpp"
+        self.replace(
+            tab,
+            """    build_id_hex = Common::HexToString(build_id_array, false);
+
+    // Get disabled cheats set for this build_id (may be empty initially)
+    const auto& disabled_cheats_set = Settings::values.disabled_cheats[build_id_hex];
+""",
+            """    build_id_hex = Common::HexToString(build_id_array, false);
+""",
+            marker="// Get disabled cheats set for this build_id",
+            what="per-game tab: drop its private lookup",
+            invert_marker=True,
+        )
+        self.replace(
+            tab,
+            """        const bool cheat_disabled =
+            disabled_cheats_set.find(cheat_name_str) != disabled_cheats_set.end();""",
+            """        const bool cheat_disabled = FileSys::IsCheatDisabled(build_id_hex, {}, cheat_name_str);""",
+            marker="FileSys::IsCheatDisabled(build_id_hex, {}, cheat_name_str)",
+            what="per-game tab reads the shared selection",
+        )
+        self.replace(
+            tab,
+            """    const std::string cheat_name = item->text().toStdString();
+    auto& disabled_cheats_set = Settings::values.disabled_cheats[build_id_hex];
+
+    const bool is_checked = item->checkState() == Qt::Checked;
+
+    if (is_checked) {
+        // Enable cheat - remove from disabled set
+        disabled_cheats_set.erase(cheat_name);
+    } else {
+        // Disable cheat - add to disabled set
+        disabled_cheats_set.insert(cheat_name);
+    }
+""",
+            """    FileSys::SetCheatEnabled(build_id_hex, {}, item->text().toStdString(),
+                             item->checkState() == Qt::Checked);
+""",
+            marker="FileSys::SetCheatEnabled(build_id_hex, {}, item->text().toStdString(),",
+            what="per-game tab toggle writes the shared selection",
+        )
+        self.replace(
+            tab,
+            """    auto& disabled_set = Settings::values.disabled_cheats[build_id_hex];
+
+    QSignalBlocker blocker(item_model);
+
+    if (enabled) {
+        disabled_set.clear();
+    } else {
+        disabled_set.clear();
+    }
+
+    for (auto& items : list_items) {
+        if (items.isEmpty()) {
+            continue;
+        }
+
+        auto* item = items.front();
+        if (item == nullptr) {
+            continue;
+        }
+
+        item->setCheckState(enabled ? Qt::Checked : Qt::Unchecked);
+
+        if (!enabled) {
+            disabled_set.insert(item->text().toStdString());
+        }
+    }
+
+    if (enabled) {
+        // Ensure no disabled cheats remain when enabling all
+        disabled_set.clear();
+    }
+""",
+            """    QSignalBlocker blocker(item_model);
+
+    for (auto& items : list_items) {
+        if (items.isEmpty()) {
+            continue;
+        }
+
+        auto* item = items.front();
+        if (item == nullptr) {
+            continue;
+        }
+
+        item->setCheckState(enabled ? Qt::Checked : Qt::Unchecked);
+        FileSys::SetCheatEnabled(build_id_hex, {}, item->text().toStdString(), enabled);
+    }
+""",
+            marker="FileSys::SetCheatEnabled(build_id_hex, {}, item->text().toStdString(), enabled);",
+            what="per-game tab enable/disable all writes the shared selection",
+        )
+
     # -- verification ----------------------------------------------------------------------
     def verify(self) -> None:
         checks = [
@@ -479,6 +727,8 @@ void GameListWorker::RunScan() {""",
             ("src/citron/game_list_worker.cpp", "void GameListWorker::RunScan()"),
             ("src/citron/game_list_worker.h", "void RunScan();"),
             ("src/citron/game_list_worker.cpp", "FinishAbortedScan"),
+            ("src/core/file_sys/patch_manager.cpp", "IsCheatDisabled(build_id, source, GetCheatName(cheat))"),
+            ("src/citron/configuration/configure_per_game_cheats.cpp", "FileSys::IsCheatDisabled("),
             ("dist/languages/zh_CN.ts", "<TS "),
         ]
         failures = []
@@ -511,16 +761,18 @@ def main() -> int:
     print(f"=== Citron Chinese build patch ===\nsource: {citron}")
     patcher = Patcher(citron)
     try:
-        print("\n[1/5] translations")
+        print("\n[1/6] translations")
         patcher.patch_translations()
-        print("\n[2/5] default language")
+        print("\n[2/6] default language")
         patcher.patch_default_language()
-        print("\n[3/5] cheat engine master switch")
+        print("\n[3/6] cheat engine master switch")
         patcher.patch_cheat_setting()
-        print("\n[4/5] cheat manager dialog")
+        print("\n[4/6] cheat manager dialog")
         patcher.patch_cheat_manager()
-        print("\n[5/5] game list scan crash fix")
+        print("\n[5/6] game list scan crash fix")
         patcher.patch_scan_crash()
+        print("\n[6/6] shared cheat selection")
+        patcher.patch_cheat_unify()
         print("\n[verify]")
         patcher.verify()
     except PatchError as error:
